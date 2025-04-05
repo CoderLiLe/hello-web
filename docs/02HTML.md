@@ -1,3 +1,75 @@
+<details>
+<summary>目录</summary>
+```
+1. HTML 基本语法
+    1.1 文档声明
+    1.2 基本页面结构
+    1.3 如何掌握一个标签
+        标签的语义、功能
+        标签的属性以及属性值如何设置
+        标签是单标签和双标签
+    1.4 注释
+    
+2. HTML 标签总结
+   2.1 结构标签
+       html
+       head
+       body
+   2.2 head 中的标签
+       meta  charset
+       title
+3. 排版标签
+   h1~h6
+   p
+   hr
+   br
+   pre
+   div
+4. 文本标签
+   em
+   strong
+   ins
+   del
+   sup
+   sub
+   span
+5. 图片标签
+   img 属性 src、alt、width、height
+6. 相对路径和绝对路径
+   绝对路径： 网络绝对路径 、 计算机本地绝对路径
+   相对路径： ./  ../
+7. 超链接和锚点
+   a 标签， 属性: href、target
+8. 列表
+   无序列表 ul li
+   有序列表 ol li
+   定义列表 dl dt dd
+9. 表格
+   9.1 表格结构
+   9.2 table 标签属性： width、height、border、cellspacing、cellpadding
+   9.3 单元格宽高
+   9.4 单元格内容对齐方式  align、valign
+   9.5 单元格跨行跨列  td、th属性： rowspan\colspan
+   9.6 标签： table、caption、thead、tbody、tfoot、tr、td、th
+10. 表单
+   10.1 表单整体设置 form标签：action、target
+   10.2 表单控件 9 中类型
+      文本输入框、密码输入框、单选框、复选框、提交按钮、重置按钮、普通按钮、文本域、下拉选项
+   10.3 表单控件属性
+       name、value、disabled    
+11. 表单标签
+    label
+    fieldset legend
+12. iframe
+13. 字符实体
+    &nbsp;  &lt;  &gt;   &amp;
+    &yen;  &copy;  &times;  &divide;
+14. 全局属性
+    title、lang、id、name、class、style
+15. meta 元信息
+```
+</details>
+
 ## 1 HTML 基本语法
 
 ### 1.1 HTML 文件
@@ -315,4 +387,525 @@ target 属性设置目标文件在哪个窗口打开，默认值是 _self,表示
 
 <!-- 跳转到页面顶部 -->
 <a href="#"></a>
+```
+
+## 8 列表
+
+### 8.1 无序列表
+
+```html
+文字无序列表：
+<ul>
+      <li>HTML 超文本标记语言</li>
+      <li>CSS 层叠样式表</li>
+      <li>JavaScript 浏览器端脚本语言</li>
+</ul>
+
+超链接无序列表：
+<ul>
+     <li>
+         <a href="#">感悟习近平主席俄罗斯之行的“历史逻辑”</a>
+     </li>
+     <li>
+         <a href="#">携手向未来！习近平谈构建人类命运共同体</a>
+     </li>
+     <li>
+         <a href="#">镜观·领航｜命运与共 携手建设更加美好的世界</a>
+     </li>
+     <li>
+         <a href="#">总台“中国式现代化与世界新机遇”阿联酋专场研讨会在阿布扎比成功举办</a>
+     </li>
+</ul>
+
+嵌套无序列表：
+ <ul>
+     <li>
+         <a href="#">首页</a>
+     </li>
+     <li>
+         <a href="#">论坛</a>
+     </li>
+     <li>
+         <a href="#">关于我们</a>
+         <ul>
+             <li>
+                 <a href="#">联系我们</a>
+             </li>
+             <li>
+                 <a href="#">加入我们</a>
+             </li>
+             <li>
+                 <a href="#">举报我们</a>
+             </li>
+         </ul>
+     </li>
+     <li>
+         <a href="#">商城</a>
+     </li>
+     <li>
+         <a href="#">博客</a>
+     </li>
+</ul>
+```
+
+> 无序列表可以用于表示一组相关的内容，如新闻列表、文章列表、商品列表、导航 等
+
+### 8.2 有序列表
+
+```html
+<ol>
+    <li>高小乐</li>
+    <li>比尔盖茨</li>
+    <li>巴菲特</li>
+    <li>索罗斯</li>
+    <li>马云</li>
+</ol>
+```
+
+> 有序列表可以用于排序类的列表，如排行榜等。
+
+### 8.3 定义列表
+
+```html
+<!-- 
+    一个dt对应一个dd
+-->
+<dl>
+    <dt>HTML</dt>
+    <dd>超文本标记语言</dd>
+    <dt>CSS</dt>
+    <dd>层叠样式表</dd>
+    <dt>JavaScript</dt>
+    <dd>浏览器端脚本语言</dd>
+</dl>
+
+<!-- 
+    一个dt对应多个dd 
+-->
+<dl>
+    <dt>如何掌握一个HTML标签？</dt>
+    <dd>该标签的语义功能</dd>
+    <dd>该标签的属性以及属性值如何设置</dd>
+    <dd>该标签是单标签还是双标签</dd>
+</dl>
+```
+
+### 8.4 列表标签总结
+
+| 标签名 | 功能和语义       | 属性 | 单标签还是双标签 |
+| ------ | ---------------- | ---- | ---------------- |
+| ul     | 无序列表包裹元素 |      | 双标签           |
+| ol     | 有序列表包裹元素 |      | 双标签           |
+| li     | 列表项           |      | 双标签           |
+| dl     | 定义列表包裹元素 |      | 双标签           |
+| dt     | 定义列表项标题   |      | 双标签           |
+| dd     | 定义列表项描述   |      | 双标签           |
+
+**注意：**
+
+```
+li 必须被 ul 或者 ol 直接包裹!
+```
+
+## 9 表格标签
+
+### 9.1 表格的结构
+
+```
+table
+    caption
+    thead
+        tr
+            td/th
+            ....
+        tr
+        ...
+    tbody
+        tr
+            td/th
+            ...
+        tr
+        ...
+    tfoot
+        tr
+            td/th
+            ...
+        tr
+        ...
+```
+
+```html
+<table border="1">
+    <!-- 表格标题 -->
+    <caption>用户信息表</caption>
+    <!-- 表格头 -->
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>地址</th>
+        </tr>
+    </thead>
+    <!-- 表格体 -->
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>曹操</td>
+            <td>男</td>
+            <td>13378652389</td>
+            <td>上海市松江区</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>刘备</td>
+            <td>男</td>
+            <td>13378652388</td>
+            <td>上海市浦东区</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>高小乐</td>
+            <td>男</td>
+            <td>13378652387</td>
+            <td>上海市松江区</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>孙悟空</td>
+            <td>男</td>
+            <td>13378652386</td>
+            <td>上海市黄浦区</td>
+        </tr>
+    </tbody>
+    <!-- 表格脚 -->
+    <tfoot></tfoot>
+</table>
+```
+
+### 9.2 表格整体样式设置
+
+给 table 标签设置如下属性：
+
+```
+width：  设置宽度
+height:  设置高度
+cellspacing： 设置单元格之间的间距
+cellpadding： 设置单元格内补白（边框与内容的间距）
+border： 设置边框边框
+```
+
+### 9.3 设置单元格宽高
+
+给 td、th 设置 width 和 height 属性：
+
+```
+给 td、th 设置 width 相当于设置列宽
+给 td、th 设置 height 相当于设置行高 
+```
+
+给 tr 和 td 设置 height 有什么区别：
+
+```
+给 th、td 设置height，实际行高会在设置的高度的基础上加上上下的 cellpadding
+给 tr 设置 height 就是总行高
+```
+
+### 9.4 设置单元格中内容对齐方式
+
+**设置单元格内容横向对齐方式：**
+
+```
+给 thead、tbody、tfoot 设置 align 属性，属性的值： left、right、center，所包裹的单元格都会生效
+给 tr 设置 align 属性，属性的值： left、right、center，所包裹的单元格都会生效
+给 td、th 设置 align 属性，属性的值： left、right、center，本单元格会生效
+```
+
+**设置单元格内容纵向对齐方式：**
+
+```
+给 thead、tbody、tfoot 设置 valign 属性，属性的值： top、bottom、middle，所包裹的单元格都会生效
+给 tr 设置 valign 属性，属性的值： top、bottom、middle，所包裹的单元格都会生效
+给td、th 设置 valign 属性，属性的值： top、bottom、middle，本单元格会生效
+```
+
+### 9.5 单元格跨行和跨列（重要）
+
+给 td、th 设置属性：
+
+```
+rowspan： 设置所跨行数
+colspan： 设置所跨列数
+```
+
+### 9.6 表格标签总结
+
+| 标签名  | 功能和语义   | 属性                                                         | 单标签还是双标签 |
+| ------- | ------------ | ------------------------------------------------------------ | ---------------- |
+| table   | 表格包裹元素 | width<br>height<br>cellspacing<br>cellpadding<br>border      | 双标签           |
+| caption | 表格标题     |                                                              | 双标签           |
+| thead   | 表格头       | align<br>valign                                              | 双标签           |
+| tbody   | 表格体       | align<br/>valign                                             | 双标签           |
+| tfoot   | 表格脚       | align<br/>valign                                             | 双标签           |
+| tr      | 行           | height<br>align<br/>valign                                   | 双标签           |
+| td      | 单元格       | width<br>height<br>align<br/>valign<br>colspan<br>rowspan    | 双标签           |
+| th      | 表头单元格   | width<br/>height<br/>align<br/>valign<br/>colspan<br/>rowspan | 双标签           |
+
+
+
+## 10 表单
+
+### 10.1 表单总体设置
+
+```html
+<form action="http://www.baidu.com/s" target="_blank">
+     <input type="text" name="wd">
+     <button>搜索</button>
+</form>
+```
+
+### 10.2 表单控件
+
+#### ① 文本输入框
+
+```html
+<input type="text"> <br>
+
+<!-- type 属性的默认值就是 text -->
+<input> <br>
+
+<!-- maxlength 可以限制最大输入长度 -->
+<input type="text" maxlength="10">
+```
+
+#### ② 密码输入框
+
+```html
+<input type="password"> <br>
+<input type="password" maxlength="6">
+```
+
+#### ③ 单选框
+
+```html
+ <input type="radio" name="gender">男
+<input type="radio" name="gender">女
+<input type="radio" name="gender" checked>其他
+```
+
+```
+1. 多个单选框要实现单选效果，需要设置相同的 name 属性值
+2. 设置 checked 属性可以实现默认选中，该属性不需要值 
+```
+
+#### ④ 复选框
+
+```html
+<input type="checkbox">唱
+<input type="checkbox">跳
+<input type="checkbox" checked>RAP
+<input type="checkbox">打篮球
+<input type="checkbox" checked>敲代码
+```
+
+```
+设置 checked 属性可以实现默认选中，该属性不需要值 
+```
+
+#### ⑤ 提交按钮
+
+```html
+<input type="submit">
+<input type="submit" value="免费注册">
+<button type="submit">提交</button>
+<button>登录</button>
+```
+
+#### ⑥ 重置按钮
+
+```html
+<input type="reset">
+<button type="reset">重置</button>
+```
+
+#### ⑦ 普通按钮
+
+```html
+<input type="button" value="普通按钮01">
+<button type="button">普通按钮02</button>
+```
+
+#### ⑧ 文本域
+
+```html
+<textarea rows="10" cols="60"></textarea>
+```
+
+```
+rows 设置默认显示的行数，影响高度
+cols 设置默认显示的列数，影响宽度
+```
+
+#### ⑨ 下拉选项
+
+```html
+<select>
+    <option>江苏省</option>
+    <option>安徽省</option>
+    <option>河南省</option>
+    <option selected>新疆维吾尔自治区</option>
+    <option>内蒙古自治区</option>
+    <option>广西壮族自治区</option>
+</select>
+```
+
+```
+默认选中的是第一个选项，可以使用 selected 设置默认选项
+```
+
+### 10.3 表单控件的属性
+
+#### ① name 属性
+
+```
+1. name 用于给表单控件设置标识，与后端对应
+2. 多个单选框要实现单选效果需要设置相同的 name
+3. 下拉选项需要将 name 设置到 select 上
+4. 提交按钮、重置按钮、普通按钮不要设置 name 属性
+```
+
+#### ② value 属性
+
+```
+1. 文本输入框、密码输入框，value 可以设置默认显示的内容
+2. 单选框、复选框，value 设置真正提交的数据
+3. input 实现的提交按钮、重置按钮、普通按钮，value 设置按钮上的文字
+4. button 和 textarea 不需要 value
+5. 下拉选项option可以使用value设置真正提交的数据，如果没有设置value，双标签中的文字作为提交的数据
+```
+
+#### ③ disabled 属性
+
+```
+1. 表单控件设置 disabled 属性将变为不可用
+2. disabled 属性不需要值
+3. select 设置disable 属性整个下拉选项不可用；option 设置 disabled 属性该选项不可选。
+```
+
+
+## 11 表单
+
+### 11.1 label 标签的使用
+
+```html
+<!-- 使用label关联描述文字和输入框 -->
+<label for="usernameInp">用户名：</label>
+<input type="text" id="usernameInp">
+
+<!-- 使用label关联选择框 单选框、复选框 -->
+<label>
+    <input type="radio" name="gender">男
+</label>
+<label>
+    <input type="radio" name="gender">女
+</label>
+```
+
+### 11.2 fieldset 和 legend 标签（了解）
+
+```html
+<form>
+    <fieldset>
+        <legend>标题内容</legend>
+        各种表单控件...
+    </fieldset>
+</form>
+```
+
+### 11.3 表单标签总结
+
+| 标签名   | 语义和功能                         | 属性                                                         | 单标签和双标签 |
+| -------- | ---------------------------------- | ------------------------------------------------------------ | -------------- |
+| form     | 表单包裹元素                       | action：设置表单提交地址。<br>target：设置提交地址从那个窗口打开 | 双标签         |
+| input    | 各种类型的表单控件                 | type：表单控件类型。<br>maxlength：最大可输入长度。<br>checked：设置默认选中。<br>name：表单控件标识。<br>value：表单控件的值。<br>disabled：设置为不可用。 | 单标签         |
+| button   | 各种类型的按钮                     | type：按钮类型。<br>disabled：设置为不可用。                 | 双标签         |
+| textarea | 文本域                             | rows: 默认显示的行数。<br>cols：默认显示的列数。<br>name：表单控件标识。<br/>disabled：设置为不可用。 | 双标签         |
+| select   | 下拉选项包裹元素                   | name：表单控件标识。<br/>disabled：设置为不可用。            | 双标签         |
+| option   | 下拉的选项                         | value：表单控件的值。<br/>selected：设置默认选中<br>disabled：设置为不可用。 | 双标签         |
+| label    | 用于关联表单控件                   | for：表单控件的id                                            | 双标签         |
+| fieldset | 设置外围的边框                     | 无                                                           | 双标签         |
+| legend   | 设置表单标题<br>需要与fieldset配合 | 无                                                           | 双标签         |
+
+```
+input 标签的 type 属性值有 text、password、radio、checkbox、submit、reset、button， 默认值 text
+button 标签的 type 属性值有 submit、reset、button，默认值 submit
+```
+
+
+
+## 12 内联框架标签
+
+| 标签名 | 功能和语义                               | 属性                                                         | 单标签还是双标签 |
+| ------ | ---------------------------------------- | ------------------------------------------------------------ | ---------------- |
+| iframe | 内联框架<br>将各种类型的文件引入当前页面 | src: 设置目标文件地址。<br>frameborder：设置是否有边框，0表示没有，其他数字表示有。<br>width：设置宽度。<br>height：设置高度。 | 双标签           |
+
+
+
+## 13 HTML 字符实体
+
+```
+&nbsp;          空格
+&lt;            小于号 <
+&gt;            大于号 >
+&amp;           和好 &
+
+&yen;           人民币符号
+&copy;          版权符号
+&times;         乘号
+&divide;        除号
+```
+
+更多的字符实体，请参照：https://www.w3cschool.cn/htmltags/html-symbols.html
+
+
+
+## 14 HTML 全局属性
+
+全局属性指所有的标签都具有的属性，有如下全局属性：
+
+```
+id      唯一标识，可以用作锚点名、可以用作css选择器
+name    设置名称标识，对于表单控件用处较大
+class   设置类名，用于css选择器
+style   用于直接设置css样式
+title   设置提示文字，鼠标悬浮在元素上会显示
+lang    设置语言，英文：en; 中文：zh-CN
+```
+
+语言参考代码：https://www.w3school.com.cn/tags/html_ref_language_codes.asp
+
+
+
+## 15 meta 元信息
+
+```html
+<!-- 字符集编码 -->
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+
+<!-- 网页关键字 -->
+<meta name="keywords" content="8-12个以英文逗号隔开的单词/词语">
+
+<!-- 网页描述信息 -->
+<meta name="description" content="80字以内的一段话，与网站内容相关">
+
+<!-- 设置完美视口 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 设置网页刷新 -->
+<!-- <meta http-equiv="refresh" content="3"> -->
+<!-- 定时跳转 -->
+<meta http-equiv="refresh" content="10,url=http://www.atguigu.com">
+<title>Document</title>
 ```
