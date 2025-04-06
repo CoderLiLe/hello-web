@@ -3,10 +3,10 @@
 
 ## 目录
 - [邂逅前端开发](docs/01start_web.md)
-- [HTML](docs/02html.md)
-- [CSS](docs/03css.md)
-- [HTML5](docs/04html5.md)
-- [CSS3](docs/05css3.md)
+- [HTML](docs/02HTML.md)
+- [CSS](docs/03CSS.md)
+- [HTML5](docs/04HTML5.md)
+- [CSS3](docs/05CSS3.md)
 
 
 - [HTML编码规范](docs/html_code_guide.md)
