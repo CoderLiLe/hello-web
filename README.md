@@ -13,3 +13,4 @@
 
 - [HTML编码规范](docs/html_code_guide.md)
 - [CSS编码规范](docs/css_code_guide.md)
+- [JavaScript编码规范](docs/js_code_guide.md)
