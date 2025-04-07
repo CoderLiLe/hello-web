@@ -11,6 +11,7 @@
 - [函数](docs/07JS.md)
 - [BOM 和 DOM](docs/08JS.md)
 - [事件和监听](docs/09JS.md)
+- [JS高阶](docs/10JS.md)
 
 
 - [HTML编码规范](docs/html_code_guide.md)
