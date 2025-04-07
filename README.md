@@ -7,6 +7,8 @@
 - [CSS](docs/03CSS.md)
 - [HTML5](docs/04HTML5.md)
 - [CSS3](docs/05CSS3.md)
+- [JS基础语法](docs/06JS.md)
+- [函数](docs/07JS.md)
 
 
 - [HTML编码规范](docs/html_code_guide.md)
