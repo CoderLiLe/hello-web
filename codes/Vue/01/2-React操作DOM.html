@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/react.development.js"></script>
+	<script src="lib/react-dom.development.js"></script>
+	<script src="lib/babel.min.js"></script>
+</head>
+<body>
+<div id="root">
+
+</div>
+</body>
+<script type="text/babel">
+	
+	const root = ReactDOM.createRoot(document.querySelector("#root"));
+	const App = () => {
+		const [str,setStr] = React.useState("我确定你就是那只匹着羊皮的狼！");
+		return (
+			<>
+				<input onInput={(e)=>setStr(e.target.value)} defaultValue={str} type="text"/>
+				<input onChange={(e)=>setStr(e.target.value)} value={str} type="text"/>
+				<div>{str}</div>
+			</>
+		);
+	}
+	root.render(<App/>);
+</script>
+</html>

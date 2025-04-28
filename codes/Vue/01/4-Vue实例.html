@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!--1- 引入核心模块，提供了构造函数Vue	-->
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+	// 1- vm即是Vue实例。
+	// 2- Vue构造函数接收一个配置对象。
+	// 3- 配置对象中可以设置data属性（类型是一个对象）
+	// 4- data对象的属性会作为vm的实例属性(记住)。
+	// 5- 建议将方法放置到methods属性中（类型也是一个对象）
+	// const vm = new Vue({
+	// 	// 实例中的数据
+	// 	data:{
+	// 		a:1,
+	// 		b:2,
+	// 		c:{
+	// 			userName:"zhangsan"
+	// 		},
+	// 		d:[1,2,3]
+	// 	},
+	// 	// 定义方法
+	// 	methods:{
+	// 		fn(){
+	//
+	// 		}
+	// 	}
+	// });
+	// console.log(vm);
+	
+	
+	// 关于data的特点：
+	// 1- data中的属性会作为Vue实例中的属性
+	// 2- data的属性值发生改变，那么Vue实例中对应的属性值也会发生改变
+	// 3- Vue实例中的属性值发生改变，那么data中的属性值也会发生改变。
+	const data = {
+		a:1
+	}
+	const vm = new Vue({
+		data
+	});
+	data.a = 100;
+	vm.a = 200;
+	console.log(vm.a,data.a);
+</script>
+</html>

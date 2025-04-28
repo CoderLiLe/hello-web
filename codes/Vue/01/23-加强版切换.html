@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		#root button {
+			padding: 5px;
+			margin: 5px;
+		}
+		
+		#root button.active {
+			background: red;
+		}
+		
+		#root div {
+			width: 600px;
+			height: 300px;
+			border: 1px solid green;
+		}
+	</style>
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<button @click="index=i" :class="{active:index===i}" :key="item.id" v-for="(item,i) in newsList">{{item.typeName}}</button>
+	<div v-show="index===i" v-for="(data,i) in newsList">
+		<p v-for="info in data.items">
+			<a :href="info.newsHref" target="_blank">{{info.newsTitle}}</a>
+		</p>
+	</div>
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#root",
+		data:{
+			index:0,
+			newsList:[
+				{
+					id:1,
+					typeName:"体育",
+					items:[
+						{
+							id:11,
+							newsTitle:"CBA选秀大会：陈国豪当选状元 邹阳意外跌至第五",
+							newsHref:"https://fans.sports.qq.com/post.htm?id=1771451668139868317&mid=63#1_allWithElite"
+						},
+						{
+							id:12,
+							newsTitle:"从大山里的孩子到CBA职业球员，云南滑翔机矣进宏的故事有多励志？",
+							newsHref:"https://new.qq.com/rain/a/20230715V03AI700"
+						}
+					]
+				},
+				{
+					id:2,
+					typeName:"娱乐",
+					items:[
+						{
+							id:21,
+							newsTitle:"《奔跑吧》后期团队回应！坦言压力很大，曝最后一期能播且很精彩",
+							newsHref:"https://new.qq.com/rain/a/20230715V04IB500"
+						},
+						{
+							id:22,
+							newsTitle:"朱珠一边拍戏一边带娃，抱着女儿候场好心酸，两岁珠宝颜值复刻妈妈",
+							newsHref:"https://new.qq.com/rain/a/20230715V041EZ00"
+						}
+					]
+				},
+				{
+					id:3,
+					typeName:"财经",
+					items:[
+						{
+							id:31,
+							newsTitle:"经济学家姚余栋：房地产是“黄金坑”，能熬出来，还有实实在在的需求",
+							newsHref:"https://new.qq.com/rain/a/20230713V09O3D00"
+						},
+						{
+							id:32,
+							newsTitle:"国常会：我国正处于经济恢复的关键期 要做好能源电力保供工作",
+							newsHref:"https://new.qq.com/rain/a/20230714A08E8400"
+						}
+					]
+				}
+			]
+		}
+	})
+</script>
+</html>

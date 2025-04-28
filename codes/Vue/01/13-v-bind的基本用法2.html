@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<!-- 以下程序必须看懂：	-->
+	<a href="http://www.baidu.com">百度</a>
+	<hr/>
+	<a :href="one">百度</a>
+	<hr/>
+	<a :[h]="two">淘宝</a>
+	<a :[h]='two'>淘宝</a>
+	<a :[h]=two>淘宝</a>
+	<hr/>
+	<!--以下尝试看懂，看不懂记住	-->
+	<a :href="'http://qq.com'">腾讯1</a>
+	<a :href='"http://qq.com"'>腾讯2</a>
+	<a href="http://qq.com">腾讯3</a>
+	
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#root",
+		data:{
+			one:"http://www.baidu.com",
+			two:"http://www.taobao.com",
+			h:"href"
+		}
+	})
+</script>
+</html>

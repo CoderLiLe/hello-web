@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<!--未使用v-bind,直接设置属性值，而不需要使用Vue的实例属性	-->
+	<img width="50" src="https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif" alt="">
+	<hr/>
+	<!-- 将Vue实例属性imgSrc的值作为src的属性值。	-->
+	<img v-bind:width="imgW" v-bind:src="imgSrc" alt=""/>
+	<hr/>
+	<!-- 使用v-bind,直接设置属性值，而不需要使用Vue的实例属性	-->
+	<img v-bind:width="300" v-bind:src="'https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif'" alt="">
+	<hr/>
+	<a href="http://www.baidu.com">百度</a>
+	<hr/>
+	<!-- 将字符串作为href的属性值-->
+	<a v-bind:href='"http://www.baidu.com"'>{{siteName}}</a>
+	<hr/>
+	<!-- 将实例属性siteHref作为href的属性值	-->
+	<a v-bind:href="siteHref">{{"百度3"}}</a>
+	<hr/>
+	<!-- 将实例属性w的值作为img的属性的名字。	-->
+	<img v-bind:[w]="imgW" v-bind:[h]="imgH" v-bind:[s]="imgSrc" alt=""/>
+	
+	<hr/>
+	<a :href="siteHref">{{"百度3"}}</a>
+	<img :width="imgW" :src="imgSrc" alt="">
+	<img :[w]="imgW" :[s]="imgSrc" alt="">
+</div>
+</body>
+<script>
+	// v-bind:属性名 有一个简写形式：冒号
+	new Vue({
+		el:"#root",
+		data:{
+			imgSrc:"https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif",
+			imgW:200,
+			imgH:400,
+			siteName:"百度2",
+			siteHref:"http://www.baidu.com",
+			w:"width",
+			h:"height",
+			s:"src"
+		}
+	})
+</script>
+</html>

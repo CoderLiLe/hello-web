@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<!-- 1- 数组-->
+<!--	<div v-for="item in arr">{{item}}</div>-->
+<!--	<div v-for="(value,index) in arr">{{index}}：{{value}}</div>-->
+	
+	<!-- 2- 对象-->
+<!--	<div v-for="item in obj">{{item}}</div>-->
+<!--	<div v-for="(value,key) in obj">{{key}}:{{value}}</div>-->
+	
+	
+	<!-- 3- 数字-->
+<!--	<div v-for="item in num">{{item}}</div>-->
+<!--	<div v-for="(n,i) in num">{{i}}:{{n}}</div>-->
+	<!-- 4- 字符串-->
+<!--	<div v-for="item in str">{{item}}</div>-->
+<!--	<div v-for="(s,i) in str">{{i}}:{{s}}</div>-->
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#root",
+		data:{
+			arr:["zhangsan","wangwu","zhaoliu","yanqi","shenba","qianjiu"],
+			obj:{
+				userName:"zhangsan",
+				age:12
+			},
+			num:10,// [1,2,3,4,5,6,7,8,9,10]
+			str:"我爱你中国，我亲爱的母亲，我为你流泪也为你自豪！"
+		}
+	})
+</script>
+</html>

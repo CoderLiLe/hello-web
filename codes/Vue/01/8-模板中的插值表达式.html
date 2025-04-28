@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<!--将Vue实例下的属性num进行渲染-->
+		<p>{{num}}</p>
+		<!--将Vue实例下的属性str进行渲染-->
+		<p>{{str}}</p>
+		<!--将字符串进行渲染-->
+		<p>{{"str"}}</p>
+		<!--将数字进行渲染-->
+		<p>{{1}}</p>
+		<!--将Vue实例下的属性bol进行渲染-->
+		<p>{{bol}}</p>
+		<!--将布尔值进行渲染-->
+		<p>{{false}}</p>
+		<!--将Vue实例下的属性fn进行渲染-->
+		<p>{{fn}}</p>
+		<!--将Vue实例下的fn函数运行的结果进行渲染-->
+		<p>{{fn()}}</p>
+		<!--将Vue实例下的属性arr进行渲染-->
+		<p>{{arr}}</p>
+		<!--将Vue实例下的属性obj进行渲染-->
+		<p>{{obj}}</p>
+		<p>{{null}}</p>
+		<p>{{undefined}}</p>
+		<p>{{sex===1?"男":"女"}}</p>
+		<p>{{str.split("").reverse().join("")}}</p>
+		<template></template>
+	</div>
+</body>
+<script>
+	// 总结1：插值表达式支持字符串，数字，布尔，对象，数组，方法
+	// 总结2：undefined,null不会进行任何输出（与React相同）
+	// 总结3：数组不支持直接展开（React支持）
+	// 总结4：支持输出对象（React不支持）
+	// 总结5：Vue中包裹标签为<template></template>
+	
+	new Vue({
+		el:"#root",
+		data:{
+			num:1,
+			str:"师法魔级超",
+			bol:true,
+			arr:[1,2,3,4],
+			sex:1,
+			obj:{
+				userName:"zhangsan"
+			}
+		},
+		methods:{
+			fn(){
+				return this.str.split("").reverse().join("");
+			}
+		}
+	})
+</script>
+</html>

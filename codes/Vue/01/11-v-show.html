@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+<!--	<p v-if="isShow">v-if</p>-->
+<!--	<p v-show="isShow">v-show</p>-->
+<!--	<p v-show='isShow'>1</p>-->
+<!--	<p v-show=isShow>2</p>-->
+	<p v-show="'isShow'">3</p>
+	<p v-show="''">4</p>
+	<p v-show="1">5</p>
+	<p v-show="0">6</p>
+	<p v-show="true">7</p>
+	<p v-show="false">8</p>
+	<p v-show="null">9</p>
+	<p v-show="undefined">10</p>
+</div>
+</body>
+<script>
+	// v-if与v-show的值都是布尔值。
+	// v-if为true表示渲染元素，false表示不渲染元素
+	// v-show为true表示显示元素，false表示隐藏元素（通过display:none）
+	// 注意1：空字符串，0，undefined,null作为判断条件相当于false
+	// 注意2：非空字符串，1作为判断条件相当于true
+	new Vue({
+		el:"#root",
+		data:{
+			// isShow:true
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<div id="root">
+		<input type="text">
+		<div></div>
+	</div>
+</body>
+<script>
+	const inp = document.querySelector("#root input");
+	const div = document.querySelector("#root div");
+	let str = "我是一只小小小小鸟，怎么飞也飞不高！";
+	inp.value = div.innerHTML = str;
+	inp.oninput = (e)=>{
+		div.innerHTML = str = e.target.value;
+	}
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<h3>v-text</h3>
+		<p v-text="userName">{{str}}</p>
+		<p v-text='userName'>{{str}}</p>
+		<p v-text=userName>{{str}}</p>
+		<p v-text=`userName`>{{str}}</p>
+		<hr/>
+		<h3>v-html</h3>
+		<p v-html="userName">{{str}}</p>
+		<p v-html='userName'>{{str}}</p>
+		<p v-html=userName>{{str}}</p>
+		<p v-html=`userName`>{{str}}</p>
+		<template v-html="userName">123</template>
+	</div>
+</body>
+<script>
+	// 响应式：视图是通过数据进行驱动的（当数据发生改变，视图会根据所使用的数据的变化而变化）
+	// 响应式即是视图会响应最新的数据。
+	// v-text与v-html的共同特点：
+	// 1- 值是一个字符串
+	// 2- 该字符串会作为Vue实例的属性名，将对应的属性值在指令所在的标签中进行输出。
+	// 3- 会覆盖原有数据。
+	// 4- 属性值可以使用双引号，单引号
+	// 5- 属性值也可以省略双引号，单引号
+	// 6- 如果使用的是反引号会将包裹的值在标签中直接输出
+	// 7- 无法与template结合使用。
+	// v-text与v-html的区别:
+	// v-text不支持HTML标签而v-html支持。
+	new Vue({
+		el:"#root",
+		data:{
+			str:"我是一个字符串",
+			userName:"zhangsan"
+		}
+	})
+	
+</script>
+</html>

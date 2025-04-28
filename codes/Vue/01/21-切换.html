@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		#root button {
+			padding: 5px;
+			margin: 5px;
+		}
+		
+		#root button.active {
+			background: red;
+		}
+		
+		#root div {
+			width: 500px;
+			height: 300px;
+			border: 1px solid green;
+		}
+	</style>
+	<title>Title</title>
+</head>
+<body>
+<div id="root">
+	<button>体育</button>
+	<button>娱乐</button>
+	<button>财经</button>
+	<div>体育新闻列表</div>
+	<div>娱乐新闻列表</div>
+	<div>财经新闻列表</div>
+</div>
+</body>
+<script>
+	// const btns = document.querySelectorAll("#root button");
+	// const divs = document.querySelectorAll("#root div");
+	// let index = 0;// 选中的下标。
+	// btns.forEach(function(item,i){
+	// 	divs[i].style.display = "none";
+	// 	item.onclick = function(){
+	// 		if(i === index) return;
+	// 		btns[index].className = null
+	// 		divs[index].style.display = "none";
+	//
+	// 		index = i;
+	//
+	// 		btns[index].className = "active"
+	// 		divs[index].style.display = "block";
+	//
+	// 	}
+	// });
+	// divs[index].style.display = "block";
+	// btns[index].className = "active";
+	
+	
+	// 优化
+	const btns = document.querySelectorAll("#root button");
+	const divs = document.querySelectorAll("#root div");
+	let index = 0;// 选中的下标。
+	init();
+	function init(){
+		btns.forEach(function (item, i) {
+			hide(i)
+			item.onclick = function () {
+				if (i === index) return;
+				hide();
+				index = i;
+				show();
+			}
+		});
+		show();
+	}
+	function hide(i=index){
+		btns[i].className = null
+		divs[i].style.display = "none";
+	}
+	function show() {
+		divs[index].style.display = "block";
+		btns[index].className = "active";
+	}
+</script>
+</html>
