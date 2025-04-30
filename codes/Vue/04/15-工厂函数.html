@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	// 1- 字面量的写法
+	// let obj = {
+	// 	a:1,
+	// 	b:2
+	// }
+	
+	// 2- new Object
+	// let obj = new Object();
+	// obj.a = 1;
+	// obj.b = 2;
+	
+	// 3- 字面量写法如果出现同属性的对象时声明太繁琐。
+	function fn(){
+	
+	}
+	function actionCreator(type,payload){
+		return {
+			type,
+			payload
+		}
+	}
+	fn(actionCreator("CHNAGE_NUM",100));
+	fn(actionCreator("CHANGE_AGE",200));
+</script>
+</html>

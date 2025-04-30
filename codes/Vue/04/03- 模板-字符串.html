@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	有一个女生，有一天忘记化妆，结果被记旷工一天！
+	<h3>{{a}}</h3>
+	<h3>{{b}}</h3>
+</div>
+</body>
+<script>
+	// 一旦指定了模板，那么会将模板的内容替换掉el所指定的挂载元素。
+	new Vue({
+		el:"#app",
+		data:{
+			a:1,
+			b:2
+		},
+		methods:{},
+		filters:{},
+		computed:{},
+		// template:"<div>" +
+		// 		"<p>有一个男生，十分爱干净！一天换一双袜子，三十天后再重新从三十双袜子中再找一双穿上！</p>" +
+		// 		"<p>{{a}},{{b}}</p>"+
+		// 		"</div>"
+		
+		template:`
+			<div>
+				<h3>template-字符串</h3>
+				<p>{{a}}</p>
+				<p>{{b}}</p>
+			</div>
+		`
+	})
+</script>
+</html>

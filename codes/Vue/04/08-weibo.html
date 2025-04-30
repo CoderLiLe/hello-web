@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div class="jyArea">
+	<take-comment></take-comment>
+	<comment-on></comment-on>
+</div>
+<template id="takeTp">
+	<div class="takeComment">
+		<textarea name="textarea" class="takeTextField" id="tijiaoText"></textarea>
+		<div class="takeSbmComment">
+			<input type="button" class="inputs" value="" />
+		</div>
+	</div>
+</template>
+<template id="commentTp">
+	<div class="commentOn">
+		<div class="noContent">暂无留言</div>
+		<div class="messList">
+			<div class="reply">
+				<p class="replyContent">内容</p>
+				<p class="operation">
+					<span class="replyTime">2020.03.10 01:01:01</span>
+					<span class="handle">
+                    	<a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">9</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+				</p>
+			</div>
+		</div>
+		<page-list></page-list>
+	</div>
+</template>
+</body>
+<script>
+	new Vue({
+		el:".jyArea",
+		components:{
+			TakeComment:{
+				template:"#takeTp"
+			},
+			CommentOn:{
+				template:"#commentTp",
+				components:{
+					PageList:{
+						template:`
+							<div class="page">
+							    <a href="javascript:;" class="active">1</a>
+							    <a href="javascript:;">2</a>
+							    <a href="javascript:;">3</a>
+							</div>
+						`
+					}
+				}
+			}
+		}
+		
+	})
+</script>
+</html>

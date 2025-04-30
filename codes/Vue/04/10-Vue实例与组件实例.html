@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<button @click="fn">点我</button>
+	<hr/>
+	<one></one>
+</div>
+</body>
+<script>
+	Vue.prototype.$useName = "zhangsan";
+	const vm = new Vue({
+		el:"#app",
+		methods:{
+			fn(){
+				console.log(this === vm);// true
+				console.log(this.__proto__ === Vue.prototype);// true
+				console.log(vm.__proto__ === Vue.prototype);// true
+				console.log(this.$useName)
+			}
+		},
+		components:{
+			// Vue配置对象中有什么属性，那么组件配置对象中就可以设置什么属性
+			one:{
+				template:(`
+					<button @click="fn2">one</button>
+				`),
+				methods:{
+					fn2(){
+						// this是通过VueComponent实例化出来的
+						// 组件实例与Vue实例有什么关联:this.__proto__.__proto__ === Vue.prototype
+						// console.log("fn2",this);
+						console.log(this.__proto__);// Vue实例
+						console.log(this.__proto__.__proto__ === Vue.prototype);
+						console.log(this.$useName)
+					}
+				}
+			}
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<one :a="1"></one>
+	<hr/>
+	<two :num="1" :user-name="userName"></two>
+	<hr/>
+	<three :age="90" hobby="游泳" :info="{a:100,b:200}"></three>
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan"
+		},
+		components:{
+			One:{
+				// 1- 数组
+				props:["a"],
+				template:(`
+					<div>
+						<p>a:{{a}}</p>
+					</div>
+				`)
+			},
+			Two:{
+				// 2- 对象,对象中的属性名即是限制类型的属性名
+				props:{
+					num:Number,// 接收的属性num的类型必须是Number
+					userName:String,// 接收的属性userName的类型必须是字符串
+				},
+				template:(`
+					<div>
+						<p>num:{{num}}</p>
+						<p>userName:{{userName}}</p>
+					</div>
+				`)
+			},
+			Three:{
+				props:{
+					age: {
+						type: Number,// 属性age的类型必须是数字
+						required: true// 属性age不允许省略
+					},
+					hobby:{
+						type:String,
+						default:"学习"
+					},
+					// 如果数据类型为数组或对象，那么default必须设置为工厂函数，通过该工厂函数返回默认值
+					info:{
+						type:Object,
+						default(){
+							return {
+								a:1,
+								b:2
+							}
+						}
+					},
+					arr:{
+						type:Array,
+						default(){
+							return [1,2,3,4]
+						}
+					}
+				},
+				template:(`
+					<div>
+						<p>age:{{age}}</p>
+						<p>hobby:{{hobby}}</p>
+						<p>info:{{info}}</p>
+						<p>arr:{{arr}}</p>
+					</div>
+				`)
+			}
+		}
+	})
+</script>
+</html>

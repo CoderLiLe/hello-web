@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<button @click="changeNum(2)">{{num}}</button>
+	<hr/>
+	<!-- 传递函数	-->
+	<one :num="num" :change-num="changeNum"></one>
+	<hr/>
+	<!-- 自定义事件：自定义了一个名字为suibian,事件处理函数为changeNum的自定义事件 -->
+	<two :num="num" @laowang="changeNum(3)" @suibian="changeNum"></two>
+</div>
+</body>
+<script>
+	// 总结：
+	// 如何设置？
+	//  在父级使用组件时，向该组件传递@开头的属性，@右侧为自定义的事件名，事件名的=右侧是事件处理函数
+	//  如果设置的事件语句携带了参数，那么在调用时无法传递参数。
+	// 如何调用？
+	//  在组件中通过this.$emit("自定义事件的名字",参数1，参数2，参数3)
+	//  在组件中不需要对自定义事件进行设置（不需要通过props属性进行设置）
+	new Vue({
+		el:"#app",
+		data:{
+			num:1
+		},
+		methods:{
+			changeNum(num,b,c,d){
+				console.log("changeNum执行啦！",num,b,c,d);
+				this.num += num;
+			}
+		},
+		components:{
+			One:{
+				props:["num","changeNum"],
+				template:(`
+					<button @click="changeNum(1)">one:{{num}}</button>
+				`)
+			},
+			Two:{
+				props:["num"],
+				template:(`
+					<div>
+						<button @click="fn">two:{{num}}</button>
+						<button @click="fn2">two:{{num}}</button>
+					</div>
+				`),
+				methods:{
+					fn(){
+						// 接收的第一个参数是事件的名字，通过this.$emit可以触发自定义的事件
+						// $emit函数是Vue.prototype对象中。
+						this.$emit("suibian",1,2,3,4);
+					},
+					fn2(){
+						this.$emit("laowang",100,200,300);
+					}
+				}
+			}
+		}
+	})
+</script>
+</html>

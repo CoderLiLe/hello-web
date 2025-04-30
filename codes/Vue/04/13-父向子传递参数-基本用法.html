@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>父：{{userName}}</h3>
+	<hr/>
+	<app a="1" :b="1" :user-name="userName" :password="passWord"></app>
+</div>
+</body>
+<script>
+	// 1- 父向子传递参数通过属性。
+	// 2- 子组件不可以直接使用传递过来的属性，需要对其通过props进行设置
+	// 3- 属性是只读的，不允许修改。
+	// 4- 一旦在props中指定接收的属性后，那么状态也好，函数也好，过滤器等不允许与设置的属性名相同
+	new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan",
+			passWord:123456
+		},
+		components:{
+			App:{
+				// 设置允许接收的属性名字
+				props:["a","b","userName","password"],
+				data(){
+					return {
+						a:100
+					}
+				},
+				template:(`
+					<div>
+						<h3>App</h3>
+						<p>a:{{a}}</p>
+						<p>b:{{b}}</p>
+						<p>userName:{{userName}}</p>
+						<p>passWord:{{password}}</p>
+						<button @click="userName=userName+'!'">{{userName}}</button>
+					</div>
+				`)
+			}
+		}
+	})
+</script>
+</html>

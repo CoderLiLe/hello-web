@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>{{userName}}</h3>
+	<hr/>
+	<One></One>
+</div>
+</body>
+<script>
+	//注意：在组件中声明数据状态data属性，类型是一个函数，返回值必须是一个对象，对象当中的属性即是组件中的数据状态。
+	new Vue({
+		el:"#app",
+		data:{
+			userName:"vue实例"
+		},
+		methods:{},
+		filters:{},
+		computed:{},
+		
+		components:{
+			One:{
+				// 写成工厂函数模式的好处：1- 返回的对象是独一无二的，2-可以在返回之前写一些逻辑
+				data(){
+					return {
+						userName:"one数据状态"
+					}
+				},
+				methods:{},
+				filters:{},
+				computed:{},
+				template:(`
+					<h3>one:{{userName}}</h3>
+				`)
+			}
+		}
+	})
+</script>
+</html>

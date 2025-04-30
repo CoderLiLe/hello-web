@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	// 1- Promise
+	// 2- async await
+	{
+		async function fn(){
+		
+		}
+	}
+	{
+		const fn = async function(){
+		
+		}
+	}
+	{
+		const fn = async ()=>{
+		
+		}
+	}
+	{
+		const obj = {
+			one:async function(){
+			
+			},
+			async two(){
+			
+			},
+			three:async ()=>{
+			
+			}
+		}
+	}
+	{
+		const arr = [1,2,3,4];
+		arr.map(async function(){
+		
+		})
+	}
+	{
+		// async 返回的值永远是一个新的Promise实例
+		// const p = Promise.resolve(90);
+		// async function fn(){
+		// 	// 如果return返回的是非Promise实例,那么调用该函数结果为成功
+		// 	// return 1;
+		//
+		// 	// 如果返回的是Promise实例
+		// 	// return Promise.resolve(100);
+		// 	// return p;
+		// 	// return Promise.reject(200);
+		// 	try{
+		// 		const str = "";
+		// 		str();
+		// 	}catch (err){
+		// 		console.log(1,err);
+		//
+		// 	}
+		//
+		// }
+		//
+		// console.log(fn());
+	}
+	{
+		async function fn(){
+			// const a = await Promise.resolve(1);
+			// console.log("a",a);
+			
+			await new Promise(()=>{});
+			return 100;
+		}
+		
+		console.log(fn());
+	}
+	
+</script>
+</html>

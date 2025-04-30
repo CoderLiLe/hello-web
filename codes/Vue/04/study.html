@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="module">
+	// import my from "./components/my.js";
+	// const obj = my;
+	// console.log(obj);// {template:"abc"}
+	
+	// import suibian,{a as aa ,b} from "./components/one.js";
+	// let a = 100;
+	// console.log(a,b,aa,suibian);
+	//
+	// import React,{useState,useEffect} from "react";
+	
+	// import React,{useState,useEffect} from "./components/one.js";
+	
+	// let str = "./components/one.js";
+	// import React from str;
+	// function fn(){
+		// import React from "./components/one.js";
+		// console.log(React);
+	// }
+	
+	// let str = "./components/one.js";
+	// import(str).then(value=>{
+	// 	console.log(value);
+	// })
+	
+	// function Box(){
+	//
+	// }
+	// Box.prototype.$abc = 100;
+	// const box = new Box();
+	// console.log(box.__proto__ === Box.prototype);// true
+	// console.log(box.$abc)
+	
+	
+	let userName = "a";
+	function fn(){
+		let userName = "b";
+		return function(){
+			console.log(userName);
+		}
+	}
+	const my = fn();
+	my();
+	
+</script>
+</html>

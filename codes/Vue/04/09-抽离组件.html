@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link href="style/weibo.css" rel="stylesheet" type="text/css" />
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div class="jyArea">
+	<take-comment></take-comment>
+	<comment-on></comment-on>
+</div>
+</body>
+<script type="module">
+	import TakeComment from "./components/TakeComment.js";
+	import CommentOn from "./components/CommentOn.js";
+	new Vue({
+		el:".jyArea",
+		components:{
+			TakeComment,
+			CommentOn
+		}
+		
+	})
+</script>
+</html>

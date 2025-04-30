@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>学习组件</h3>
+	<one></one>
+	<hr/>
+	<two></two>
+	<Two></Two>
+	<hr/>
+	<three></three>
+	<hr/>
+	<comment-on></comment-on>
+	<hr/>
+	<my-com/>
+</div>
+</body>
+<script type="x/template" id="two">
+	<div>
+		<h3>two组件</h3>
+	</div>
+</script>
+<template id="three">
+	<div>
+		<h3>three组件</h3>
+	</div>
+</template>
+<script>
+	// 在Vue中声明组件（注册组件），需要在配置对象中设置components属性，属性的名字即是组件的名字
+	// 注意：
+	// 1- 如果组件名字小写，在视图中小写即可实现渲染
+	// 2- 如果组件名字首字母大写，其它小写，那么视图中可以实现渲染（首字母可大写，也可小写）
+	// 3- 如果使用驼峰命名，在视图中渲染需要用-进行分割多个单词,单词小写。
+	// 建议：
+	// 形式一：首字母大写 Two   Two
+	// 形式二：全部小写，单词之间用-分割(建议)  comment-on----->comment-on
+	// 形式三：定义组件采用大驼峰命名，使用时全部小写，岮峰之间使用-CommentOn    --->comment-on
+	new Vue({
+		el:"#app",
+		components:{
+			// 注册了一个名字为one的组件
+			one:{
+				template:`
+					<div>
+						<h3>one组件</h3>
+					</div>
+				`
+			},
+			Two:{
+				template:"#two"
+			},
+			three:{
+				template:"#three"
+			},
+			CommentOn:{
+				template:`
+					<div>
+						<h3>CommentOn</h3>
+					</div>
+				`
+			},
+			"my-com":{
+				template:`
+					<h3>myCom组件</h3>
+				`
+			}
+		}
+		
+	})
+</script>
+</html>

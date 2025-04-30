@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	有一个女生，有一天忘记化妆，结果被记旷工一天！
+	<h3>{{a}}</h3>
+	<h3>{{b}}</h3>
+</div>
+<template id="tp">
+	<div>
+		<h3>template-template</h3>
+		<p>{{a}}</p>
+		<p>{{b}}</p>
+	</div>
+</template>
+</body>
+
+<script>
+	// 一旦指定了模板，那么会将模板的内容替换掉el所指定的挂载元素。
+	new Vue({
+		el:"#app",
+		data:{
+			a:1,
+			b:2
+		},
+		methods:{},
+		filters:{},
+		computed:{},
+		// 指定id为tp的script标签包裹的内容为模板的内容
+		template:"#tp"
+	})
+</script>
+</html>
