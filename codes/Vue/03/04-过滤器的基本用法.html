@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<div v-for="item in goodsList" :key="item.id">
+		<p>商品名称：{{item.goodsName}}</p>
+		<p>商品价格1：{{item.goodsPrice | currency}}</p>
+		<p>商品价格2：{{item.goodsPrice | currency2(1,"$")}}</p>
+		<p>上架时间：{{item.addTime | date}}</p>
+		<hr/>
+	</div>
+</div>
+</body>
+<script>
+	// 1- 过滤器的本质是一个函数
+	// 2- 过滤器应用主要有两种：1-插值{{}} 2-属性渲染v-bind:xxx="过滤器"
+	// 3- 过滤器分为全局过滤器以及局部过滤器
+	// 4- 过滤器在使用时：
+	//    4-1 数据 | 过滤器的名字   （|：管道符）
+	//    4-2 数据 | 过滤器的名字(参数1，参数2，...)   （|：管道符）
+	// 5- 定义过滤器：
+	//    5-1 在Vue配置对象中增加属性filters,值是一个对象
+	//    5-2 filters对象的属性名即是过滤器的名字，属性值是函数。
+	//    5-3 过滤器函数返回的值即是过滤后要渲染的内容。
+	//    5-4 过滤器函数接收的第一个参数即是要被过滤的数据
+	//    5-5 过滤器接收的第二个参数开始才是使用过滤器传递的参数
+	//        比如使用时 100.12345 | currency(1) ,过滤器  currency(v,n){/*v:100,n:1*/}
+	
+	new Vue({
+		el:"#app",
+		data:{
+			goodsList:[
+				{
+					id:1,
+					goodsName:"葡萄",
+					goodsPrice:12.345,
+					addTime:Date.now()
+				},{
+					id:2,
+					goodsName:"梨",
+					goodsPrice: 45.678,
+					addTime: Date.now()-998887666
+				}
+			]
+		},
+		filters:{
+			// v是被过滤的数据
+			currency(v){
+				return "￥"+v.toFixed(2);
+			},
+			currency2(v,n=2,type="￥"){
+				console.log(v,n);
+				return type+v.toFixed(n);
+			},
+			// 声明了一个名字为date的过滤器，t即是要过滤的数据
+			date(t){
+				const timer = new Date(t);
+				return timer.getFullYear()+"-"+
+						(timer.getMonth()+1).toString().padStart(2,0)+"-"+
+						timer.getDate().toString().padStart(2,0)+" "+
+						timer.getHours().toString().padStart(2,0)+":"+
+						timer.getMinutes().toString().padStart(2,0)+":"+
+						timer.getSeconds().toString().padStart(2,0);
+			}
+		}
+	})
+</script>
+</html>

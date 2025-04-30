@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button>点我</button>
+</body>
+<script>
+	// Promise
+	function jsonp(){
+		return new Promise(resolve=>{
+			const fnName = "jquery"+Math.random().toString(36).slice(2);
+			// 创建一个函数：当加载完百度的地址后会调用该函数，该函数会接收一个参数obj,并调用resolve,然后将obj传递给resolve
+			// window[fnName] = function(obj){
+			// 	resolve(obj);
+			// }
+			
+			// 将resolve作为window[fnName]的值。resolve的类型也是一个函数。当加载完百度地址后会调用该函数，并为其传递数据
+			window[fnName] = resolve;
+			const script = document.createElement("script");
+			script.src = "https://www.baidu.com/sugrec?prod=pc&wd=三&cb="+fnName;
+			script.onload = function(){
+				delete window[fnName];
+				document.body.removeChild(script);
+			}
+			document.body.appendChild(script);
+		})
+		
+	}
+	document.querySelector("button").onclick = async function () {
+		// jsonp().then(value=>{
+		// 	console.log(value);
+		// })
+		
+		const res = await jsonp();
+		console.log(res);
+	}
+
+</script>
+</html>

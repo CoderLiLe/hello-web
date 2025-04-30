@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button>点我</button>
+</body>
+<script>
+	function my(obj){
+		console.log(obj);
+	}
+</script>
+<script>
+	
+	document.querySelector("button").onclick = function () {
+		const script = document.createElement("script");
+		script.src = "https://www.baidu.com/sugrec?prod=pc&wd=三&cb=my";
+		document.body.appendChild(script);
+	}
+	
+</script>
+
+<!--<script>-->
+<!--	function my(obj) {-->
+<!--		console.log(obj)-->
+<!--	}-->
+<!--</script>-->
+<!--<script src="https://www.baidu.com/sugrec?prod=pc&wd=%E4%B8%89&cb=my"></script>-->
+</html>

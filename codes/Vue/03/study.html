@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+	async function fn(){
+		const n = await new Promise((resolve)=>{
+			resolve(100)
+		}).then(value=>{
+			return new Promise((resolve)=>{
+				resolve(value+9)
+			})
+		});
+		console.log(111,n)
+	}
+	fn();
+	
+	
+	// const obj = {
+	// 	a:1,
+	// 	b:2
+	// }
+	// function fn(a,b){
+	// 	console.log(a,b)
+	// }
+	// fn(obj.a,obj.b);
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		[v-cloak]{
+			display:none;
+		}
+	</style>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app" v-cloak>
+	<p v-for="(item,index) in arr" :key="index">{{item}}</p>
+</div>
+</body>
+<script>
+	// 当挂载完成后，Vue会将v-cloak属性移除。解决屏幕闪烁问题
+	// 1- 在未挂载完Vue时，会增加v-cloak属性，为该属性增加样式display:none;将拥有该属性的元素隐藏
+	// 2- 当挂载完成后，Vue会将v-cloak属性移除。样式不会起作用，即会显示元素。
+	setTimeout(()=>{
+		new Vue({
+			el:"#app",
+			data:{
+				arr:[1,2,3,4]
+			}
+		})
+	},3000)
+	
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<button @click="getHospitalList">获取数据</button>
+	<h3 v-if="isLoading">正在拼命加载中……</h3>
+	<template v-else>
+		<div v-for="item in hospitalList">
+			<h3>{{item.hosname | book}}</h3>
+<!--			<img height="100" :src="'data:image/jpeg;base64,'+item.logoData" alt="">-->
+			<img height="100" :src="item.logoData | base64" alt="">
+			<hr/>
+		</div>
+	</template>
+	
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			hospitalList:[],
+			isLoading:false
+		},
+		methods:{
+			async getHospitalList(){
+				this.isLoading = true;
+				// 1
+				// fetch("./data.json").then(value=>{
+				// 	value.json().then(res=>{
+				// 		console.log(res);
+				// 	})
+				// })
+				
+				// 2
+				// fetch("./data.json").then(value=>{
+				// 	return value.json()
+				// }).then(res=>{
+				// 	console.log(res);
+				// })
+				
+				// 3
+				const res = await fetch("./data.json").then(value=>{
+					return value.json()
+				})
+				this.hospitalList = res.data.content;
+				this.isLoading = false;
+			}
+		},
+		filters:{
+			book(v){
+			    return "《"+v+"》";
+			},
+			base64(v){
+				return "data:image/jpeg;base64,"+v;
+			}
+			
+		}
+	})
+</script>
+</html>

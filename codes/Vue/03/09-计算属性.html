@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="str">
+		
+		<!--
+			插值表达式的运算是Vue模块中的语法。
+			如果表达式较简单且不会被重复使用建议采用插值表达式。
+			如果需要在多处需要进行计算的话，那么不建议。
+			如果程序较复杂，那么会让Vue模板过重，阅读困难，不建议。
+			如果数据发生改变，插值表达式也会重新计算。
+		-->
+		<h3>插值表达式</h3>
+		<p>{{str.split("").reverse().join("")}}</p>
+		<p>{{str.split("").reverse().join("")}}</p>
+		<hr/>
+		<!--
+			函数是定义在methods属性中.
+			可以被重复使用，可以书写复杂的逻辑。
+			可以传递参数。
+			函数中的this指向Vue实例.
+			如果函数设置为箭头函数，那么this指向的是window
+			如果数据状态发生改变，那么函数会被再次调用。
+			如果函数在模块中调用多次，那么当数据状态发生改变，那么调用多次。
+			没有缓存。
+		-->
+		<h3>函数</h3>
+		<p>{{reverseFn()}}</p>
+		<p>{{reverseFn()}}</p>
+		<hr/>
+		<!--
+			1- 过滤器是通过Vue配置对象下的filters对象来定义的
+			2- filters对象的属性名即是过滤器的名字
+			3- 过滤器的类型是一个函数
+			4- 过滤器接收的第一个参数是要被过滤的数据，后面参数是自定义的，返回的结果是要在视图中输出的内容
+			5- 过滤器在使用时需要写在视图中的管道符的右侧。也可以额外传递参数。
+			6- 过滤器函数中的this指向的是window.在过滤器中无法操作Vue实例中的数据状态。
+			7- 应用场景：对数据进行格式化处理，操作的数据不同，可以重复使用。（不是更新数据的）
+			8- 没有缓存。
+		-->
+		<h3>过滤器</h3>
+		<p>{{str | reverseFilter}}</p>
+		<p>{{str | reverseFilter}}</p>
+		<hr/>
+		<!--
+			1- 计算属性是通过在Vue配置对象中的computed对象中定义的
+			2- computed对象的属性名即是计算属性的名字
+			3- 计算属性的本质是一个函数(也可以是对象控制读写），但要作为属性来使用.
+			4- 计算属性只有一个形参，即Vue实例。在使用时由于作为属性来使用，所以无法传递参数。
+			5- 本质：写的是函数，但是Vue会将该函数执行，并将其结果进行缓存，并作为当前实例的属性来处理。
+			6- 函数的返回值即是输出的内容(计算属性的值）
+			7- 关于缓存：计算属性的结果可以被一个或多个数据状态控制，只要有一个数据状态发生改变，那么计算属性会被重新执行（即重新计算结果）。
+		    8- 应用场景：偏向于某一数据的结果（由不同的数据状态计算）
+		    9- 不支持异步逻辑。
+		-->
+		<h3>计算属性</h3>
+		<input type="text" v-model="reverseCom">
+		<p>{{reverseCom}}</p>
+		<p>{{reverseCom}}</p>
+		<p>{{reverseCom}}</p>
+		<p>{{reverseCom}}</p>
+		<p>{{reverseCom}}</p>
+	</div>
+</body>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			str:"我现在在上海！"
+		},
+		methods:{
+			reverseFn(){
+				// console.log("reverseFn被调用啦！")
+				return this.str.split("").reverse().join("");
+			}
+		},
+		filters:{
+			reverseFilter(v){
+				// console.log("reverseFilter",this)
+				return v.split("").reverse().join("")
+			}
+		},
+		computed:{
+			// 1- 函数
+			// reverseCom(vm){
+			// 	console.log("reverseCom",this===vm);// true
+			// 	return this.str.split("").reverse().join("");
+			// }
+			
+			// 2- 对象-读写
+			reverseCom:{
+				// 接收的参数是Vue实例，返回的结果即是该计算属性的结果
+				get(vm){
+					console.log(this===vm)
+					return this.str.split("").reverse().join("");
+				},
+				// 在修改计算属性时执行，接收的参数即是修改的值
+				set(v){
+					this.str = v.split("").reverse().join("");
+				}
+			}
+		}
+	})
+</script>
+</html>

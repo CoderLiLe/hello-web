@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<h3>商品列表</h3>
+	<div v-for="item in goodsList" :key="item.id">
+		<p>商品名称：{{item.goodsName}}</p>
+		<p>商品价格：{{item.goodsPrice | currency}}</p>
+		<p>库存数量：{{item.storeNum}}</p>
+		<p>上架时间：{{item.addTime | date}}</p>
+		<button @click="joinCar(item.id)">加入购物车</button>
+		<hr/>
+	</div>
+	<hr/>
+	<h3>购物车列表</h3>
+	<template v-if="carList.length===0">
+		<h3>购物车空空如也！</h3>
+	</template>
+	<template v-else>
+		<h5>合计：{{priceSum | currency}}</h5>
+		<div v-for="item in carList">
+			<p>商品名称：{{item.goodsName}}</p>
+			<p>商品价格：{{item.goodsPrice | currency}}</p>
+			<p>购买数量：
+				<button @click="joinCar(item.id,false)">-</button>
+				{{item.buyNum}}
+				<button @click="joinCar(item.id)">+</button>
+			</p>
+			<p>小计：{{(item.buyNum * item.goodsPrice) | currency}}</p>
+			<button @click="delCarInfoById(item.id)">删除</button>
+			<hr/>
+		</div>
+		<button @click="clearCar">清空购物车</button>
+		<h5>合计：{{priceSum | currency}}</h5>
+	</template>
+
+</div>
+</body>
+<script>
+	new Vue({
+		el: "#app",
+		data: {
+			// 商品列表
+			goodsList: [
+				{
+					id: 1,
+					goodsName: "手机",
+					goodsPrice: 12.231,
+					storeNum: 10,
+					addTime: new Date().getTime()
+				}, {
+					id: 2,
+					goodsName: "笔记本",
+					goodsPrice: 24.562,
+					storeNum: 20,
+					addTime: Date.now() - 9999999999
+				}
+			],
+			// 购物车列表
+			carList: []
+		},
+		methods: {
+			// 根据ID删除购物车信息
+			
+			delCarInfoById(id) {
+				// 根据ID找到商品信息
+				const goodsInfo = this.goodsList.find(v => v.id === id);
+				if(window.confirm("您确定要删除 "+goodsInfo.goodsName+" 商品吗？")){
+					// 思路：
+					// 接收ID
+					// 根据ID找到购物车信息
+					const carInfo = this.carList.find(v => v.id === id);
+					
+					// 商品信息中的库存加上购物车中购买的数量
+					goodsInfo.storeNum += carInfo.buyNum;
+					// 删除
+					this.carList = this.carList.filter(v=>v.id !== id);
+				}
+				
+			},
+			// 加入购物车
+			joinCar(id, isJoin = true) {
+				// 加入
+				if (isJoin) {
+					/*思路：（伪代码）
+				* 1- 接收商品ID-id
+				* 2- 根据ID找到商品
+				* 3- 判断商品的库存是否充足
+				*   3-1- 不充足--提示库存不足
+				*   3-2- 充足--将该商品放置购物车
+				*       3-2-1：检查购物车中否已经有该商品
+				*           3-2-1-1：有该商品- 将购买的数量加1
+				*           3-2-1-2：无该商品- 为购物车增加该商品，购买数量初始值为1
+				*       3-2-2：商品库存减1
+				* */
+					// 根据ID找到商品
+					const goodsInfo = this.goodsList.find(v => v.id === id);
+					// 判断商品的库存是否充足
+					if (goodsInfo.storeNum < 1) {
+						// 不充足--提示库存不足
+						alert("库存不足");
+						return;
+					}
+					// 充足--将该商品放置购物车
+					// [{goodsName(商品名字),goodsPrice(商品价格),buyNum(购买数量)，id(商品id)},{}]
+					const carInfo = this.carList.find(v => v.id === id);
+					if (carInfo) {
+						// 有该商品- 将购买的数量加1
+						carInfo.buyNum++;
+					} else {
+						// 无该商品- 为购物车增加该商品，购买数量初始值为1
+						this.carList = [
+							{
+								id,
+								goodsName: goodsInfo.goodsName,
+								goodsPrice: goodsInfo.goodsPrice,
+								buyNum: 1,// 购买数量
+							},
+							...this.carList,
+						]
+					}
+					// 商品库存减1
+					goodsInfo.storeNum--;
+				} else {
+					// 减
+					// 1- 根据id找到购物车信息
+					const carInfo = this.carList.find(v => v.id === id);
+					// 2- 让购物车中的购买数量减1
+					carInfo.buyNum--;
+					// 3- 判断减1之后，购买数量是否为0，如果为0，清除该购物车信息
+					if (carInfo.buyNum < 1) {
+						this.carList = this.carList.filter(v => v.id !== id);
+					}
+					// 4- 库存加1
+					const goodsInfo = this.goodsList.find(v => v.id === id);
+					goodsInfo.storeNum++;
+					
+				}
+				
+			},
+			clearCar(){
+				if(window.confirm("您确定要清空购物车吗")){
+					this.carList.forEach(carInfo=>{
+						const goodsInfo = this.goodsList.find(v=>v.id === carInfo.id);
+						goodsInfo.storeNum+=carInfo.buyNum;
+					})
+					this.carList = [];
+				}
+				
+			}
+		},
+		filters: {
+			currency(v, n = 2, type = "￥") {
+				return type + v.toFixed(n);
+			},
+			date(t) {
+				const timer = new Date(t);
+				return timer.getFullYear() + "-" +
+						(timer.getMonth() + 1).toString().padStart(2, 0) + "-" +
+						timer.getDate().toString().padStart(2, 0) + " " +
+						timer.getHours().toString().padStart(2, 0) + ":" +
+						timer.getMinutes().toString().padStart(2, 0) + ":" +
+						timer.getSeconds().toString().padStart(2, 0);
+			}
+		},
+		computed: {
+			priceSum() {
+				return this.carList.reduce(function (num, item) {
+					return num + item.buyNum * item.goodsPrice;
+				}, 0)
+			}
+		}
+		
+	})
+</script>
+</html>

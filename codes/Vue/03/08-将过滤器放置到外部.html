@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<div v-for="item in goodsList" :key="item.id">
+		<p>商品名字：{{item.goodsName}}</p>
+		<p>商品价格：{{item.goodsPrice | currency}}</p>
+		<p>上架时间：{{item.addTime | date}}</p>
+		<hr/>
+	</div>
+</div>
+<div id="root">
+	<div v-for="item in newsList">
+		<p>新闻名字：{{item.newsTitle}}</p>
+		<p>新闻时间：{{item.newsTime | date}}</p>
+	</div>
+</div>
+</body>
+<script type="module">
+	import filters from "./lib/vue-filters.js";
+	for(let key in filters){
+		Vue.filter(key,filters[key])
+	}
+	
+	new Vue({
+		el: "#app",
+		data: {
+			goodsList: [
+				{
+					id: 1,
+					goodsName: "葡萄",
+					goodsPrice: 12.345,
+					addTime: Date.now()
+				}, {
+					id: 2,
+					goodsName: "梨",
+					goodsPrice: 45.678,
+					addTime: Date.now() - 998887666
+				}
+			]
+		}
+	})
+	new Vue({
+		el:"#root",
+		data:{
+			newsList:[
+				{
+					id:1,
+					newsTitle:"新闻一号",
+					newsTime:Date.now()
+				},
+				{
+					id:2,
+					newsTitle:"新闻二号",
+					newsTime:Date.now()
+				}
+			]
+		}
+	})
+</script>
+</html>
