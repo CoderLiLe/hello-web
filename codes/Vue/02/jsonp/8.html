@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button>发送JSONP请求</button>
+</body>
+<script>
+	document.querySelector("button").onclick = function(){
+		// 函数的名字
+		const fnName = "zhang"+Math.random().toString(36).slice(2);
+		// 在window下增加函数
+		window[fnName] = function(obj){
+			console.log(1111,obj);
+		}
+		const script = document.createElement("script");
+		script.src = "http://127.0.0.1/info2?callback="+fnName;
+		script.onload = function(){
+			delete window[fnName];
+			// 引入的文件加载完毕后执行
+			document.body.removeChild(script);
+		}
+		document.body.appendChild(script);
+	}
+</script>
+</html>

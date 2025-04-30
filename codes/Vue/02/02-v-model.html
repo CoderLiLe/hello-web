@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<!-- 单项数据绑定 -->
+<!--	<input v-bind:value="userName" type="text">-->
+<!--	<input :value="userName" type="text">-->
+	
+	<!-- 双向绑定:当输入数据后事件会被执行，$event是事件对象，$event.target是input元素	-->
+<!--	<input type="text" @input="userName=$event.target.value" :value="userName"/>-->
+	
+	<!--
+		双向绑定：v-model的本质是@input与:value的结合体（语法糖）
+		v-model:value中的:value部分可以省略
+	-->
+	<!--未简写-->
+	<input type="text" v-model:value.lazy="userName">
+	<!--简写：	-->
+	<input type="text" v-model="userName">
+</div>
+</body>
+<script>
+	// v-bind与v-model的区别：
+	// 1- v-model有修饰符：number lazy trim
+	// 2- v-model是针对于表单元素而言的。
+	new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan"
+		}
+	})
+</script>
+</html>

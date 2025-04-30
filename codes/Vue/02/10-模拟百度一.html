@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		p{
+			border:1px solid green;
+		}
+	</style>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<form action="https://www.baidu.com/s">
+		<input @input="search" autocomplete="off" type="text" name="wd">
+		<button>搜索</button>
+	</form>
+	<p :key="item.sa" v-for="item in g">{{item.q}}</p>
+</div>
+</body>
+<script type="module">
+	import jsonp from "./lib/myJsonp.js";
+	new Vue({
+		el:"#app",
+		data:{
+			g:[]
+		},
+		methods:{
+			search(e){
+				const wd = e.target.value.trim();
+				jsonp("https://www.baidu.com/sugrec",{
+					params:{
+						prod:"pc",
+						wd
+					},
+					// 与服务端约定好的查询字符串名字，用于传递函数名
+					jsonp:"cb"
+				}).then(({g=[]})=>{
+					this.g = g;
+				})
+				
+			}
+		}
+	})
+</script>
+</html>

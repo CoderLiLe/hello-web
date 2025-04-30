@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<form @click="my" action="https://www.baidu.com/s">
+		<input @click.stop type="text" name="wd">
+		<button @click.prevent.stop.once="search">搜索</button>
+	</form>
+</div>
+</body>
+<script>
+	// 修饰符串联：可以同时使用多个修饰符
+	new Vue({
+		el:"#app",
+		methods:{
+			my(){
+				alert("my");
+			},
+			search(e){
+				alert(1);
+			}
+		}
+	})
+</script>
+</html>

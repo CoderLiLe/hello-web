@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<a @click.prevent="fn" href="http://www.baidu.com">百度</a>
+	<hr/>
+	<form action="https://www.baidu.com/s" target="_blank">
+		<input name="wd" type="text">
+		<button @click.prevent="fn2">搜索</button>
+	</form>
+	<hr/>
+	<div @contextmenu.prevent="fn3" :style="{width:'100px',height:'100px',background:'red'}">大家好！</div>
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#app",
+		methods:{
+			fn(e){
+				// e.preventDefault();
+				alert(e.target.innerText);
+			},
+			fn2(e){
+				// e.preventDefault();
+				alert(e.target.innerText);
+			},
+			fn3(e){
+				// e.preventDefault();
+				console.log("fn3",e.target.innerText);
+			}
+		}
+	})
+</script>
+</html>

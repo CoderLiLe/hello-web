@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<template v-if="loginType==='email'">
+			<label for="email">邮箱：</label> <input key="email" placeholder="请输入邮箱" type="text" id="email">
+		</template>
+		<template v-else-if="loginType==='phone'">
+			<label for="phone">手机：</label> <input key="phone" placeholder="请输入手机号" type="text" id="phone">
+		</template>
+		<button @click="changeLoginType">更换登陆方式</button>
+	</div>
+</body>
+<script>
+	// 初次渲染：<label for="email">邮箱：</label> <input key="email" placeholder="请输入邮箱" type="text" id="email">
+	// 更改方式：<label for="phone">手机：</label> <input key="phone" placeholder="请输入手机号" type="text" id="phone">
+	new Vue({
+		el:"#app",
+		data:{
+			loginType:"email"
+		},
+		methods:{
+			changeLoginType(){
+				if(this.loginType === "email") this.loginType = "phone";
+				else this.loginType = "email";
+			}
+		}
+	})
+</script>
+</html>

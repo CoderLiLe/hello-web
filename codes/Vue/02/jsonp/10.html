@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button>百度</button>
+<button>京东</button>
+</body>
+<script type="module">
+	import jsonp from "./js/myJsonp.js";
+	const btns = document.querySelectorAll("button");
+	btns[0].onclick = function(){
+		jsonp("https://www.baidu.com/sugrec",{
+			params:{
+				prod:"pc",
+				wd:"三国"
+			},
+			// 与服务端约定好的查询字符串名字，用于传递函数名
+			jsonp:"cb"
+		}).then(value=>{
+			console.log(111,value);
+		})
+		
+	}
+	btns[1].onclick = function(){
+		jsonp("https://wq.360buyimg.com/data/coss/keyword/project/mpj1715.jsonp",{
+			fnName:"pj1715"
+		}).then(value=>{
+			console.log(value);
+		})
+	}
+</script>
+</html>

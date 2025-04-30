@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<button>百度</button>
+	<button>京东</button>
+</body>
+<script>
+	const btns = document.querySelectorAll("button");
+	btns[0].onclick = function(){
+		const fnName = "zhang"+Math.random().toString(36).slice(2);
+		window[fnName] = function(obj){
+			console.log(obj);
+		}
+		const script = document.createElement("script");
+		script.src = "https://www.baidu.com/sugrec?prod=pc&wd=三国&cb="+fnName;
+		script.onload = function(){
+			document.body.removeChild(script);
+		};
+		document.body.appendChild(script);
+		
+	}
+	btns[1].onclick = function(){
+		const fnName = "pj1715";
+		window[fnName] = function(obj){
+			console.log(obj);
+		}
+		const script = document.createElement("script");
+		script.src = "https://wq.360buyimg.com/data/coss/keyword/project/mpj1715.jsonp";
+		script.onload = function(){
+			document.body.removeChild(script);
+		};
+		document.body.appendChild(script);
+	}
+</script>
+</html>

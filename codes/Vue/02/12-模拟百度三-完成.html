@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		p{
+			border:1px solid green;
+		}
+		p.active{
+			background:gray;
+		}
+	</style>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<form name="searchForm" action="https://www.baidu.com/s">
+		<input @focus="isRender=true" @blur="blurHandler" @keyup.38.40="changeActiveIndex" v-model.trim="wd" @input="search" autocomplete="off" type="text" name="wd">
+		<button>搜索</button>
+	</form>
+	<template v-if="isRender">
+		<p @click="fn(index)" :key="item.sa" :class="{active:activeIndex===index}" v-for="(item,index) in g">{{item.q}}</p>
+	</template>
+
+</div>
+</body>
+<script type="module">
+	import jsonp from "./lib/myJsonp.js";
+	new Vue({
+		el:"#app",
+		data:{
+			g:[],
+			isRender:true,
+			wd:"",
+			q:"",// 搜索的关键词
+			activeIndex:-1,// 选中的下标
+			isClick:false
+		},
+		methods:{
+			blurHandler(){
+				console.log("blurHandler")
+				setTimeout(()=>{
+					if(!this.isClick){
+						this.isRender=false
+					}
+					this.isClick=false;
+				},200)
+				
+			},
+			fn(index){
+				this.isClick=true;
+				// this.activeIndex = index;
+				// this.wd = this.g[this.activeIndex].q;
+				document.querySelector("input").value = this.g[index].q;
+				document.searchForm.submit();
+			},
+			changeActiveIndex(e){
+				if(e.keyCode === 38){
+					this.activeIndex--;
+					if(this.activeIndex<-1){
+						this.activeIndex = this.g.length-1;
+					}
+					
+				}else{
+					this.activeIndex++;
+					if(this.activeIndex>this.g.length-1){
+						this.activeIndex=-1;
+					}
+				}
+				// 如果选中的activeIndex的值为-1，那么将this.q作为文本框的内容
+				if(this.activeIndex === -1) this.wd = this.q;
+				// 如果选中的activeIndex不是-1，那么将 this.g[this.activeIndex].q作为文本框的内容
+				else this.wd = this.g[this.activeIndex].q;
+				
+			},
+			search(e){
+				if(this.timer) clearTimeout(this.timer);
+				this.timer = setTimeout(()=>{
+					jsonp("https://www.baidu.com/sugrec",{
+						params:{
+							prod:"pc",
+							wd:this.wd
+						},
+						// 与服务端约定好的查询字符串名字，用于传递函数名
+						jsonp:"cb"
+					}).then(({g=[],q})=>{
+						this.g = g;
+						this.q = q;
+					})
+				},300);
+				
+				
+			}
+		}
+	})
+</script>
+</html>
