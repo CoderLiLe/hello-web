@@ -1,3 +1,12 @@
+/**
+ * @file 9.样式控制.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 导入样式
 import './index.css'
 

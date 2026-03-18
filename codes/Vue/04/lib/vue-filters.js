@@ -1,3 +1,12 @@
+/**
+ * @file vue-filters.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 export default {
 	date(t){
 		const timer = new Date(t);

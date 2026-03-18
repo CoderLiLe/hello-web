@@ -1,3 +1,12 @@
+/**
+ * @file index.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import Home from '@/views/Home'
 import Search from '@/views/Search'
 import NotFound from '@/views/NotFound'

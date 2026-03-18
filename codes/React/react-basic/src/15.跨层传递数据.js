@@ -1,3 +1,12 @@
+/**
+ * @file 15.跨层传递数据.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // App -> A -> B
 
 import { createContext, useContext } from "react"

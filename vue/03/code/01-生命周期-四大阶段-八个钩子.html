@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 生命周期 四大阶段 八个钩子</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>01 生命周期 四大阶段 八个钩子</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -61,5 +141,88 @@
       }
     })
   </script>
+</body>
+</html></code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <h3>{{ title }}</h3>
+    <div>
+      <button @click="count--">-</button>
+      <span>{{ count }}</span>
+      <button @click="count++">+</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 100,
+        title: '计数器'
+      },
+      // 1. 创建阶段（准备数据）
+      beforeCreate () {
+        console.log('beforeCreate 响应式数据准备好之前', this.count)
+      },
+      created () {
+        console.log('created 响应式数据准备好之后', this.count)
+        // this.数据名 = 请求回来的数据
+        // 可以开始发送初始化渲染的请求了
+      },
+
+      // 2. 挂载阶段（渲染模板）
+      beforeMount () {
+        console.log('beforeMount 模板渲染之前', document.querySelector('h3').innerHTML)
+      },
+      mounted () {
+        console.log('mounted 模板渲染之后', document.querySelector('h3').innerHTML)
+        // 可以开始操作dom了
+      },
+
+      // 3. 更新阶段(修改数据 → 更新视图)
+      beforeUpdate () {
+        console.log('beforeUpdate 数据修改了，视图还没更新', document.querySelector('span').innerHTML)
+      },
+      updated () {
+        console.log('updated 数据修改了，视图已经更新', document.querySelector('span').innerHTML)
+      },
+
+      // 4. 卸载阶段
+      beforeDestroy () {
+        console.log('beforeDestroy, 卸载前')
+        console.log('清除掉一些Vue以外的资源占用，定时器，延时器...')
+      },
+      destroyed () {
+        console.log('destroyed，卸载后')
+      }
+    })
+  </script>
+</body>
+</html>
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
 </body>
 </html>

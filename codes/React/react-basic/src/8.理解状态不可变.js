@@ -1,3 +1,12 @@
+/**
+ * @file 8.理解状态不可变.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import { useState } from 'react'
 
 function App () {

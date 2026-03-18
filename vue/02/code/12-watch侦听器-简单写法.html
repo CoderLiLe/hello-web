@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 watch侦听器 简单写法</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>12 watch侦听器 简单写法</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -125,4 +205,152 @@
       })
     </script>
   </body>
+</html>
+</code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 18px;
+      }
+      #app {
+        padding: 10px 20px;
+      }
+      .query {
+        margin: 10px 0;
+      }
+      .box {
+        display: flex;
+      }
+      textarea {
+        width: 300px;
+        height: 160px;
+        font-size: 18px;
+        border: 1px solid #dedede;
+        outline: none;
+        resize: none;
+        padding: 10px;
+      }
+      textarea:hover {
+        border: 1px solid #1589f5;
+      }
+      .transbox {
+        width: 300px;
+        height: 160px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: none;
+      }
+      .tip-box {
+        width: 300px;
+        height: 25px;
+        line-height: 25px;
+        display: flex;
+      }
+      .tip-box span {
+        flex: 1;
+        text-align: center;
+      }
+      .query span {
+        font-size: 18px;
+      }
+
+      .input-wrap {
+        position: relative;
+      }
+      .input-wrap span {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        font-size: 12px;
+      }
+      .input-wrap i {
+        font-size: 20px;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 条件选择框 -->
+      <div class="query">
+        <span>翻译成的语言：</span>
+        <select>
+          <option value="italy">意大利</option>
+          <option value="english">英语</option>
+          <option value="german">德语</option>
+        </select>
+      </div>
+
+      <!-- 翻译框 -->
+      <div class="box">
+        <div class="input-wrap">
+          <textarea v-model="obj.words"></textarea>
+          <span><i>⌨️</i>文档翻译</span>
+        </div>
+        <div class="output-wrap">
+          <div class="transbox">mela</div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      // 接口地址：https://applet-base-api-t.itheima.net/api/translate
+      // 请求方式：get
+      // 请求参数：
+      // （1）words：需要被翻译的文本（必传）
+      // （2）lang： 需要被翻译成的语言（可选）默认值-意大利
+      // -----------------------------------------------
+      
+      const app = new Vue({
+        el: '#app',
+        data: {
+          // words: ''
+          obj: {
+            words: ''
+          }
+        },
+        // 具体讲解：(1) watch语法 (2) 具体业务实现
+        watch: {
+          // 该方法会在数据变化时调用执行
+          // newValue新值, oldValue老值（一般不用）
+          // words (newValue) {
+          //   console.log('变化了', newValue)
+          // }
+
+          'obj.words' (newValue) {
+            console.log('变化了', newValue)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
+
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
+</body>
 </html>

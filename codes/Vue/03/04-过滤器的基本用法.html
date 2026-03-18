@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 过滤器的基本用法</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>04 过滤器的基本用法</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -70,4 +150,95 @@
 		}
 	})
 </script>
+</html></code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<div v-for="item in goodsList" :key="item.id">
+		<p>商品名称：{{item.goodsName}}</p>
+		<p>商品价格1：{{item.goodsPrice | currency}}</p>
+		<p>商品价格2：{{item.goodsPrice | currency2(1,"$")}}</p>
+		<p>上架时间：{{item.addTime | date}}</p>
+		<hr/>
+	</div>
+</div>
+</body>
+<script>
+	// 1- 过滤器的本质是一个函数
+	// 2- 过滤器应用主要有两种：1-插值{{}} 2-属性渲染v-bind:xxx="过滤器"
+	// 3- 过滤器分为全局过滤器以及局部过滤器
+	// 4- 过滤器在使用时：
+	//    4-1 数据 | 过滤器的名字   （|：管道符）
+	//    4-2 数据 | 过滤器的名字(参数1，参数2，...)   （|：管道符）
+	// 5- 定义过滤器：
+	//    5-1 在Vue配置对象中增加属性filters,值是一个对象
+	//    5-2 filters对象的属性名即是过滤器的名字，属性值是函数。
+	//    5-3 过滤器函数返回的值即是过滤后要渲染的内容。
+	//    5-4 过滤器函数接收的第一个参数即是要被过滤的数据
+	//    5-5 过滤器接收的第二个参数开始才是使用过滤器传递的参数
+	//        比如使用时 100.12345 | currency(1) ,过滤器  currency(v,n){/*v:100,n:1*/}
+	
+	new Vue({
+		el:"#app",
+		data:{
+			goodsList:[
+				{
+					id:1,
+					goodsName:"葡萄",
+					goodsPrice:12.345,
+					addTime:Date.now()
+				},{
+					id:2,
+					goodsName:"梨",
+					goodsPrice: 45.678,
+					addTime: Date.now()-998887666
+				}
+			]
+		},
+		filters:{
+			// v是被过滤的数据
+			currency(v){
+				return "￥"+v.toFixed(2);
+			},
+			currency2(v,n=2,type="￥"){
+				console.log(v,n);
+				return type+v.toFixed(n);
+			},
+			// 声明了一个名字为date的过滤器，t即是要过滤的数据
+			date(t){
+				const timer = new Date(t);
+				return timer.getFullYear()+"-"+
+						(timer.getMonth()+1).toString().padStart(2,0)+"-"+
+						timer.getDate().toString().padStart(2,0)+" "+
+						timer.getHours().toString().padStart(2,0)+":"+
+						timer.getMinutes().toString().padStart(2,0)+":"+
+						timer.getSeconds().toString().padStart(2,0);
+			}
+		}
+	})
+</script>
+</html>
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
+</body>
 </html>

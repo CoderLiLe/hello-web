@@ -1,3 +1,12 @@
+/**
+ * @file server.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 const express = require("express");
 const path = require("path");
 const app = express();

@@ -1,3 +1,12 @@
+/**
+ * @file 4.jsx-复杂条件渲染.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 定义文章类型
 const articleType = 3  // 0 1 3
 

@@ -1,3 +1,10 @@
+/*!
+ * @file base.css
+ * @description 前端CSS样式示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
 /* 去除常见标签默认的 margin 和 padding */
 * {
   margin: 0;

@@ -1,3 +1,7 @@
+# js code guide
+
+> 最后更新: 2026-03-18
+
 
 # JavaScript编码规范
 

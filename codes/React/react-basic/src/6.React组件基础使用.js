@@ -1,3 +1,12 @@
+/**
+ * @file 6.React组件基础使用.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 1. 定义组件
 
 const Button = () => {

@@ -1,3 +1,12 @@
+/**
+ * @file 19.封装自定义hook.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 封装自定义Hook
 
 // 问题: 布尔切换的逻辑 当前组件耦合在一起的 不方便复用

@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 Vue 指令 v show、v if</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>05 Vue 指令 v show、v if</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -40,5 +120,67 @@
     })
   </script>
 
+</body>
+</html></code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 100px;
+      line-height: 100px;
+      margin: 10px;
+      border: 3px solid #000;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 2px 2px 2px #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 
+    v-show底层原理：切换 css 的 display: none 来控制显示隐藏
+    v-if  底层原理：根据 判断条件 控制元素的 创建 和 移除（条件渲染）
+  -->
+
+  <div id="app">
+    <div v-show="flag" class="box">我是v-show控制的盒子</div>
+    <div v-if="flag" class="box">我是v-if控制的盒子</div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        flag: false
+      }
+    })
+  </script>
+
+</body>
+</html>
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
 </body>
 </html>

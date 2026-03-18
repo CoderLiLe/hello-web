@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14 父向子传递参数 类型限制</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>14 父向子传递参数 类型限制</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -82,4 +162,107 @@
 		}
 	})
 </script>
+</html></code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<one :a="1"></one>
+	<hr/>
+	<two :num="1" :user-name="userName"></two>
+	<hr/>
+	<three :age="90" hobby="游泳" :info="{a:100,b:200}"></three>
+</div>
+</body>
+<script>
+	new Vue({
+		el:"#app",
+		data:{
+			userName:"zhangsan"
+		},
+		components:{
+			One:{
+				// 1- 数组
+				props:["a"],
+				template:(`
+					<div>
+						<p>a:{{a}}</p>
+					</div>
+				`)
+			},
+			Two:{
+				// 2- 对象,对象中的属性名即是限制类型的属性名
+				props:{
+					num:Number,// 接收的属性num的类型必须是Number
+					userName:String,// 接收的属性userName的类型必须是字符串
+				},
+				template:(`
+					<div>
+						<p>num:{{num}}</p>
+						<p>userName:{{userName}}</p>
+					</div>
+				`)
+			},
+			Three:{
+				props:{
+					age: {
+						type: Number,// 属性age的类型必须是数字
+						required: true// 属性age不允许省略
+					},
+					hobby:{
+						type:String,
+						default:"学习"
+					},
+					// 如果数据类型为数组或对象，那么default必须设置为工厂函数，通过该工厂函数返回默认值
+					info:{
+						type:Object,
+						default(){
+							return {
+								a:1,
+								b:2
+							}
+						}
+					},
+					arr:{
+						type:Array,
+						default(){
+							return [1,2,3,4]
+						}
+					}
+				},
+				template:(`
+					<div>
+						<p>age:{{age}}</p>
+						<p>hobby:{{hobby}}</p>
+						<p>info:{{info}}</p>
+						<p>arr:{{arr}}</p>
+					</div>
+				`)
+			}
+		}
+	})
+</script>
+</html>
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
+</body>
 </html>

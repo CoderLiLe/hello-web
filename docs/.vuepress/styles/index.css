@@ -1,0 +1,41 @@
+/* 自定义样式 */
+
+:root {
+  --c-brand: #42b883;
+  --c-brand-light: #42d392;
+}
+
+/* 代码块样式优化 */
+div[class*="language-"] {
+  border-radius: 8px;
+}
+
+/* 导航栏样式 */
+.navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  padding-top: 1rem;
+}
+
+/* 内容区域样式 */
+.content__default {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 959px) {
+  .content__default {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 419px) {
+  .content__default {
+    padding: 1rem;
+  }
+}

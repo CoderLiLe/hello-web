@@ -1,3 +1,10 @@
+/*!
+ * @file iconfont.css
+ * @description 前端CSS样式示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
 @font-face {
   font-family: "iconfont"; /* Project id 3703850 */
   src: url('iconfont.woff2?t=1665647794908') format('woff2'),

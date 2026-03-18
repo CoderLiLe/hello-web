@@ -1,3 +1,12 @@
+/**
+ * @file study.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // let my = "zhangpeiyue";
 // let obj = {};
 // obj.my = 1;// 增加属性名为my,值为1的属性

@@ -1,3 +1,12 @@
+/**
+ * @file index.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import Find from '@/views/Find'
 import My from '@/views/My'
 import Friend from '@/views/Friend'

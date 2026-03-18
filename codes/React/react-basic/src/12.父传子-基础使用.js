@@ -1,3 +1,12 @@
+/**
+ * @file 12.父传子-基础使用.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 父传子
 // 1. 父组件传递数据  子组件标签身上绑定属性
 // 2. 子组件接收数据  props的参数

@@ -1,0 +1,57 @@
+{
+  "name": "hello-web",
+  "version": "1.0.0",
+  "description": "前端学习笔记和资料整理 - 现代化的前端知识库",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "lint:md": "markdownlint '**/*.md' --ignore node_modules",
+    "format:md": "prettier --write '**/*.md'",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prepare": "husky install",
+    "serve": "live-server dist --port=8080",
+    "clean": "rm -rf dist .vuepress/.cache .vuepress/.temp",
+    "optimize:docs": "node scripts/optimize-docs.js",
+    "optimize:code": "node scripts/optimize-code.js",
+    "optimize:all": "npm run optimize:docs && npm run optimize:code",
+    "update": "npm run optimize:all && npm run lint:md && npm run format:md",
+    "build:full": "node scripts/build.js",
+    "check": "npm run lint:md && npm run optimize:docs",
+    "preview": "npm run build && npm run serve"
+  },
+  "keywords": [
+    "frontend",
+    "learning",
+    "notes",
+    "javascript",
+    "html",
+    "css",
+    "vue"
+  ],
+  "author": "CoderLiLe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderLiLe/hello-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CoderLiLe/hello-web/issues"
+  },
+  "homepage": "https://github.com/CoderLiLe/hello-web#readme",
+  "devDependencies": {
+    "vuepress": "^2.0.0",
+    "vuepress-theme-hope": "^2.0.0",
+    "markdownlint-cli": "^0.35.0",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0",
+    "live-server": "^1.2.2"
+  },
+  "lint-staged": {
+    "*.md": [
+      "prettier --write",
+      "markdownlint --fix"
+    ]
+  }
+}

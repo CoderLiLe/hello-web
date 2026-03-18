@@ -1,4 +1,13 @@
 /**
+ * @file react-dom.development.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
+/**
  * @license React
  * react-dom.development.js
  *

@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 v bind基本用法</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>12 v bind基本用法</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -49,4 +129,74 @@
 		}
 	})
 </script>
+</html></code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="lib/vue.js"></script>
+</head>
+<body>
+<div id="root">
+	<!--未使用v-bind,直接设置属性值，而不需要使用Vue的实例属性	-->
+	<img width="50" src="https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif" alt="">
+	<hr/>
+	<!-- 将Vue实例属性imgSrc的值作为src的属性值。	-->
+	<img v-bind:width="imgW" v-bind:src="imgSrc" alt=""/>
+	<hr/>
+	<!-- 使用v-bind,直接设置属性值，而不需要使用Vue的实例属性	-->
+	<img v-bind:width="300" v-bind:src="'https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif'" alt="">
+	<hr/>
+	<a href="http://www.baidu.com">百度</a>
+	<hr/>
+	<!-- 将字符串作为href的属性值-->
+	<a v-bind:href='"http://www.baidu.com"'>{{siteName}}</a>
+	<hr/>
+	<!-- 将实例属性siteHref作为href的属性值	-->
+	<a v-bind:href="siteHref">{{"百度3"}}</a>
+	<hr/>
+	<!-- 将实例属性w的值作为img的属性的名字。	-->
+	<img v-bind:[w]="imgW" v-bind:[h]="imgH" v-bind:[s]="imgSrc" alt=""/>
+	
+	<hr/>
+	<a :href="siteHref">{{"百度3"}}</a>
+	<img :width="imgW" :src="imgSrc" alt="">
+	<img :[w]="imgW" :[s]="imgSrc" alt="">
+</div>
+</body>
+<script>
+	// v-bind:属性名 有一个简写形式：冒号
+	new Vue({
+		el:"#root",
+		data:{
+			imgSrc:"https://img12.360buyimg.com/pop/s590x470_jfs/t1/169453/32/37700/50662/64ae6e63Fffd824d7/f6409309d91610b1.jpg.avif",
+			imgW:200,
+			imgH:400,
+			siteName:"百度2",
+			siteHref:"http://www.baidu.com",
+			w:"width",
+			h:"height",
+			s:"src"
+		}
+	})
+</script>
+</html>
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
+</body>
 </html>

@@ -1,3 +1,12 @@
+/**
+ * @file study.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // console.log("zhang"+Math.random().toString(36).slice(2))
 // const obj = {a:1,b:2,c:3};
 // // const c = 100;

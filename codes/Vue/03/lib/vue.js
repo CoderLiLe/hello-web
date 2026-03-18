@@ -1,3 +1,12 @@
+/**
+ * @file vue.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 /*!
  * Vue.js v2.7.14
  * (c) 2014-2022 Evan You

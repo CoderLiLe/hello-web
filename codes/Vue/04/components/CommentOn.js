@@ -1,3 +1,12 @@
+/**
+ * @file CommentOn.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import PageList from "./PageList.js";
 const template = (`
 	<div class="commentOn">

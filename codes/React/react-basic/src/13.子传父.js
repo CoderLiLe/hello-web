@@ -1,3 +1,12 @@
+/**
+ * @file 13.子传父.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 核心：在子组件中调用父组件中的函数并传递实参
 
 import { useState } from "react"

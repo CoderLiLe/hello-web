@@ -1,3 +1,12 @@
+/**
+ * @file study.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 引用类型与值类型
 // let obj = {};
 // let obj2 = {};

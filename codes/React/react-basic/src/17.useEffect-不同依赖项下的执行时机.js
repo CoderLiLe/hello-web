@@ -1,3 +1,12 @@
+/**
+ * @file 17.useEffect-不同依赖项下的执行时机.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import { useEffect, useState } from "react"
 
 function App () {

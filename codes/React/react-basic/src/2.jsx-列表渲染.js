@@ -1,3 +1,12 @@
+/**
+ * @file 2.jsx-列表渲染.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 
 const list = [
   { id: 1001, name: 'Vue' },

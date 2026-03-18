@@ -1,4 +1,84 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 小黑记事本功能实现 底部功能</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #42b883;
+        }
+        
+        .description {
+            background: #f8f9fa;
+            border-left: 4px solid #42b883;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .code-container {
+            margin: 20px 0;
+        }
+        
+        .demo-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>03 小黑记事本功能实现 底部功能</h1>
+        
+        <div class="description">
+            <p><strong>描述:</strong> 前端代码示例</p>
+            <p><strong>创建时间:</strong> 2026-03-18</p>
+            <p><strong>技术栈:</strong> HTML, CSS, JavaScript</p>
+        </div>
+        
+        <div class="code-container">
+            <h2>代码实现</h2>
+            <pre><code><!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -78,5 +158,107 @@
   })
 
 </script>
+</body>
+</html>
+</code></pre>
+        </div>
+        
+        <div class="demo-container">
+            <h2>效果演示</h2>
+            <!-- 演示内容将在这里 -->
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="./css/index.css" />
+<title>记事本</title>
+</head>
+<body>
+
+<!-- 主体区域 -->
+<section id="app">
+  <!-- 输入框 -->
+  <header class="header">
+    <h1>小黑记事本</h1>
+    <input v-model="todoName"  placeholder="请输入任务" class="new-todo" />
+    <button @click="add" class="add">添加任务</button>
+  </header>
+  <!-- 列表区域 -->
+  <section class="main">
+    <ul class="todo-list">
+      <li class="todo" v-for="(item, index) in list" :key="item.id">
+        <div class="view">
+          <span class="index">{{ index + 1 }}.</span> <label>{{ item.name }}</label>
+          <button @click="del(item.id)" class="destroy"></button>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <!-- 统计和清空 → 如果没有任务了，底部隐藏掉 → v-show -->
+  <footer class="footer" v-show="list.length > 0">
+    <!-- 统计 -->
+    <span class="todo-count">合 计:<strong> {{ list.length }} </strong></span>
+    <!-- 清空 -->
+    <button @click="clear" class="clear-completed">
+      清空任务
+    </button>
+  </footer>
+</section>
+
+<!-- 底部 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  // 添加功能
+  // 1. 通过 v-model 绑定 输入框 → 实时获取表单元素的内容
+  // 2. 点击按钮，进行新增，往数组最前面加 unshift
+  const app = new Vue({
+    el: '#app',
+    data: {
+      todoName: '',
+      list: [
+        { id: 1, name: '跑步一公里' },
+        { id: 2, name: '跳绳200个' },
+        { id: 3, name: '游泳100米' },
+      ]
+    },
+    methods: {
+      del (id) {
+        // console.log(id) => filter 保留所有不等于该 id 的项
+        this.list = this.list.filter(item => item.id !== id)
+      },
+      add () {
+        if (this.todoName.trim() === '') {
+          alert('请输入任务名称')
+          return
+        }
+        this.list.unshift({
+          id: +new Date(),
+          name: this.todoName
+        })
+        this.todoName = ''
+      },
+      clear () {
+        this.list = []
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
+
+        </div>
+        
+        <footer>
+            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript代码将在这里执行
+        // 示例脚本
+    </script>
 </body>
 </html>

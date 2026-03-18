@@ -1,3 +1,12 @@
+/**
+ * @file index.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 // 项目的入口 从这里开始运行
 
 // React必要的俩个核心包

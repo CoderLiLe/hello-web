@@ -1,3 +1,12 @@
+/**
+ * @file 14.兄弟组件通信.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 
 // 1. 通过子传父 A -> App
 // 2. 通过父传子 App -> B

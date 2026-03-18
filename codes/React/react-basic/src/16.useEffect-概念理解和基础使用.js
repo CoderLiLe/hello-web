@@ -1,3 +1,12 @@
+/**
+ * @file 16.useEffect-概念理解和基础使用.js
+ * @description 前端JavaScript示例
+ * @author CoderLiLe
+ * @date 2026-03-18
+ */
+
+'use strict';
+
 import { useEffect, useState } from "react"
 
 const URL = 'http://geek.itheima.net/v1_0/channels'
