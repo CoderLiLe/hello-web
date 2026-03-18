@@ -18,7 +18,9 @@
     "update": "npm run optimize:all && npm run lint:md && npm run format:md",
     "build:full": "node scripts/build.js",
     "check": "npm run lint:md && npm run optimize:docs",
-    "preview": "npm run build && npm run serve"
+    "preview": "npm run build && npm run serve",
+    "commit": "node scripts/auto-commit.js",
+    "deploy": "npm run build && npm run commit"
   },
   "keywords": [
     "frontend",

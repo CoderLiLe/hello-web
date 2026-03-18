@@ -2,357 +2,367 @@
 
 /**
  * 代码优化脚本
- * 用于整理和优化代码示例
+ * 用于检查和优化HTML、CSS、JavaScript代码
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// 代码目录
-const CODES_DIR = path.join(__dirname, '..', 'codes');
-const VUE_DIR = path.join(__dirname, '..', 'vue');
+// 配置
+const CODE_DIRS = [
+  path.join(__dirname, '..', 'codes'),
+  path.join(__dirname, '..', 'vue')
+];
 
-// 支持的代码文件扩展名
-const CODE_EXTENSIONS = ['.html', '.js', '.css', '.vue', '.ts', '.jsx', '.tsx'];
+const IGNORE_PATTERNS = [
+  /node_modules/,
+  /\.git/,
+  /dist/,
+  /\.vuepress/
+];
 
-// 代码文件模板
-const HTML_TEMPLATE = `<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{TITLE}</title>
-    <style>
-        /* 基础样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-        
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #42b883;
-        }
-        
-        .description {
-            background: #f8f9fa;
-            border-left: 4px solid #42b883;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        
-        .code-container {
-            margin: 20px 0;
-        }
-        
-        .demo-container {
-            margin: 30px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-        
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: #6c757d;
-            font-size: 0.9em;
-            border-top: 1px solid #e9ecef;
-            padding-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>{TITLE}</h1>
-        
-        <div class="description">
-            <p><strong>描述:</strong> {DESCRIPTION}</p>
-            <p><strong>创建时间:</strong> {DATE}</p>
-            <p><strong>技术栈:</strong> {TECH_STACK}</p>
-        </div>
-        
-        <div class="code-container">
-            <h2>代码实现</h2>
-            <pre><code>{CODE}</code></pre>
-        </div>
-        
-        <div class="demo-container">
-            <h2>效果演示</h2>
-            <!-- 演示内容将在这里 -->
-            {DEMO_CONTENT}
-        </div>
-        
-        <footer>
-            <p>Hello Web - 前端学习笔记 | <a href="https://github.com/CoderLiLe/hello-web" target="_blank">GitHub仓库</a></p>
-        </footer>
-    </div>
-    
-    <script>
-        // JavaScript代码将在这里执行
-        {SCRIPT}
-    </script>
-</body>
-</html>`;
-
-// 优化HTML文件
-function optimizeHtmlFile(filePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    const fileName = path.basename(filePath, '.html');
-    
-    // 检查是否已经是优化过的格式
-    if (content.includes('Hello Web - 前端学习笔记')) {
-      console.log(`✓ 文件已优化: ${filePath}`);
-      return false;
-    }
-    
-    // 提取标题
-    let title = fileName.replace(/-/g, ' ').replace(/_/g, ' ');
-    title = title.charAt(0).toUpperCase() + title.slice(1);
-    
-    // 创建优化后的内容
-    const optimizedContent = HTML_TEMPLATE
-      .replace(/{TITLE}/g, title)
-      .replace(/{DESCRIPTION}/g, '前端代码示例')
-      .replace(/{DATE}/g, new Date().toISOString().split('T')[0])
-      .replace(/{TECH_STACK}/g, 'HTML, CSS, JavaScript')
-      .replace(/{CODE}/g, content)
-      .replace(/{DEMO_CONTENT}/g, content)
-      .replace(/{SCRIPT}/g, '// 示例脚本');
-    
-    fs.writeFileSync(filePath, optimizedContent, 'utf8');
-    console.log(`✓ 优化HTML文件: ${filePath}`);
-    return true;
-  } catch (error) {
-    console.error(`✗ 处理HTML文件失败: ${filePath}`, error.message);
-    return false;
-  }
-}
-
-// 优化JavaScript文件
-function optimizeJsFile(filePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    
-    // 检查是否已经有文件头注释
-    if (content.includes('@file') || content.includes('@description')) {
-      console.log(`✓ 文件已优化: ${filePath}`);
-      return false;
-    }
-    
-    const fileName = path.basename(filePath);
-    const fileHeader = `/**
- * @file ${fileName}
- * @description 前端JavaScript示例
- * @author CoderLiLe
- * @date ${new Date().toISOString().split('T')[0]}
+/**
+ * 获取所有代码文件
  */
-
-'use strict';
-
-`;
-    
-    const optimizedContent = fileHeader + content;
-    fs.writeFileSync(filePath, optimizedContent, 'utf8');
-    console.log(`✓ 优化JavaScript文件: ${filePath}`);
-    return true;
-  } catch (error) {
-    console.error(`✗ 处理JavaScript文件失败: ${filePath}`, error.message);
-    return false;
-  }
-}
-
-// 优化CSS文件
-function optimizeCssFile(filePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    
-    // 检查是否已经有文件头注释
-    if (content.includes('@file') || content.includes('CSS样式')) {
-      console.log(`✓ 文件已优化: ${filePath}`);
-      return false;
-    }
-    
-    const fileName = path.basename(filePath);
-    const fileHeader = `/*!
- * @file ${fileName}
- * @description 前端CSS样式示例
- * @author CoderLiLe
- * @date ${new Date().toISOString().split('T')[0]}
- */
-
-`;
-    
-    const optimizedContent = fileHeader + content;
-    fs.writeFileSync(filePath, optimizedContent, 'utf8');
-    console.log(`✓ 优化CSS文件: ${filePath}`);
-    return true;
-  } catch (error) {
-    console.error(`✗ 处理CSS文件失败: ${filePath}`, error.message);
-    return false;
-  }
-}
-
-// 查找所有代码文件
-function findCodeFiles(dir) {
+function getAllCodeFiles() {
   const files = [];
   
-  function traverse(currentDir) {
-    const items = fs.readdirSync(currentDir);
+  function traverse(dir) {
+    if (!fs.existsSync(dir)) return;
+    
+    const items = fs.readdirSync(dir);
     
     for (const item of items) {
-      const fullPath = path.join(currentDir, item);
+      const fullPath = path.join(dir, item);
+      
+      // 检查是否忽略
+      const shouldIgnore = IGNORE_PATTERNS.some(pattern => 
+        pattern.test(fullPath)
+      );
+      
+      if (shouldIgnore) continue;
+      
       const stat = fs.statSync(fullPath);
       
       if (stat.isDirectory()) {
         traverse(fullPath);
-      } else {
-        const ext = path.extname(item).toLowerCase();
-        if (CODE_EXTENSIONS.includes(ext)) {
-          files.push(fullPath);
-        }
+      } else if (isCodeFile(fullPath)) {
+        files.push(fullPath);
       }
     }
   }
   
-  traverse(dir);
+  CODE_DIRS.forEach(dir => traverse(dir));
   return files;
 }
 
-// 根据文件类型选择优化函数
-function optimizeCodeFile(filePath) {
+/**
+ * 检查是否是代码文件
+ */
+function isCodeFile(filePath) {
   const ext = path.extname(filePath).toLowerCase();
-  
-  switch (ext) {
-    case '.html':
-      return optimizeHtmlFile(filePath);
-    case '.js':
-      return optimizeJsFile(filePath);
-    case '.css':
-      return optimizeCssFile(filePath);
-    default:
-      console.log(`⚠️  跳过不支持的文件类型: ${filePath}`);
-      return false;
-  }
+  return ['.html', '.htm', '.css', '.js', '.vue', '.ts'].includes(ext);
 }
 
-// 主函数
-async function main() {
-  console.log('🚀 开始优化代码文件...\n');
+/**
+ * 检查HTML文件
+ */
+function checkHtmlFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const issues = [];
   
-  // 查找所有代码文件
-  const codeFiles = findCodeFiles(CODES_DIR);
-  const vueFiles = findCodeFiles(VUE_DIR);
-  const allFiles = [...codeFiles, ...vueFiles];
-  
-  console.log(`📁 找到 ${allFiles.length} 个代码文件\n`);
-  
-  // 优化每个文件
-  let optimizedCount = 0;
-  for (const file of allFiles) {
-    const relativePath = path.relative(process.cwd(), file);
-    const wasOptimized = optimizeCodeFile(file);
-    if (wasOptimized) optimizedCount++;
+  // 检查DOCTYPE
+  if (!content.includes('<!DOCTYPE html>')) {
+    issues.push('缺少 DOCTYPE 声明');
   }
   
-  console.log(`\n✅ 代码优化完成！`);
-  console.log(`📊 统计:`);
-  console.log(`  总文件数: ${allFiles.length}`);
-  console.log(`  优化文件数: ${optimizedCount}`);
-  console.log(`  无需优化: ${allFiles.length - optimizedCount}`);
+  // 检查字符编码
+  if (!content.includes('charset="UTF-8"') && !content.includes('charset=utf-8')) {
+    issues.push('缺少 UTF-8 字符编码声明');
+  }
   
-  // 生成代码文件清单
-  console.log('\n📋 生成代码文件清单...');
-  generateCodeIndex(allFiles);
+  // 检查viewport
+  if (!content.includes('viewport')) {
+    issues.push('缺少 viewport 声明');
+  }
+  
+  // 检查语义化标签
+  const semanticTags = ['header', 'nav', 'main', 'section', 'article', 'aside', 'footer'];
+  const hasSemanticTags = semanticTags.some(tag => content.includes(`<${tag}`));
+  
+  if (!hasSemanticTags) {
+    issues.push('建议使用语义化HTML标签');
+  }
+  
+  return issues;
 }
 
-// 生成代码文件索引
-function generateCodeIndex(files) {
-  const index = {
-    html: [],
-    js: [],
-    css: [],
-    vue: [],
-    other: []
-  };
+/**
+ * 检查CSS文件
+ */
+function checkCssFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const issues = [];
   
-  for (const file of files) {
-    const ext = path.extname(file).toLowerCase().replace('.', '');
-    const relativePath = path.relative(process.cwd(), file);
-    
-    if (index[ext]) {
-      index[ext].push(relativePath);
-    } else {
-      index.other.push(relativePath);
+  // 检查CSS选择器复杂度
+  const lines = content.split('\n');
+  let complexSelectors = 0;
+  
+  for (const line of lines) {
+    if (line.includes('{') && !line.includes('@')) {
+      const selector = line.trim().split('{')[0].trim();
+      
+      // 检查选择器复杂度
+      const depth = (selector.match(/[>+~]/g) || []).length;
+      const classes = (selector.match(/\.[a-zA-Z_-]+/g) || []).length;
+      const ids = (selector.match(/#[a-zA-Z_-]+/g) || []).length;
+      
+      if (depth > 2 || classes > 3 || ids > 1) {
+        complexSelectors++;
+      }
     }
   }
   
-  const indexContent = `# 代码文件索引
-生成时间: ${new Date().toISOString()}
-
-## 文件统计
-- HTML文件: ${index.html.length} 个
-- JavaScript文件: ${index.js.length} 个  
-- CSS文件: ${index.css.length} 个
-- Vue文件: ${index.vue.length} 个
-- 其他文件: ${index.other.length} 个
-- 总计: ${files.length} 个
-
-## 文件列表
-
-### HTML文件 (${index.html.length})
-${index.html.map(file => `- ${file}`).join('\n')}
-
-### JavaScript文件 (${index.js.length})
-${index.js.map(file => `- ${file}`).join('\n')}
-
-### CSS文件 (${index.css.length})
-${index.css.map(file => `- ${file}`).join('\n')}
-
-### Vue文件 (${index.vue.length})
-${index.vue.map(file => `- ${file}`).join('\n')}
-
-### 其他文件 (${index.other.length})
-${index.other.map(file => `- ${file}`).join('\n')}
-`;
+  if (complexSelectors > 0) {
+    issues.push(`发现 ${complexSelectors} 个复杂CSS选择器`);
+  }
   
-  const indexPath = path.join(__dirname, '..', 'CODE_INDEX.md');
-  fs.writeFileSync(indexPath, indexContent, 'utf8');
-  console.log(`✅ 代码索引已生成: ${indexPath}`);
+  // 检查未使用的样式（简单检查）
+  const styleDefinitions = content.match(/[.#][a-zA-Z_-]+\s*{/g) || [];
+  if (styleDefinitions.length > 50) {
+    issues.push('CSS文件较大，建议拆分');
+  }
+  
+  return issues;
+}
+
+/**
+ * 检查JavaScript文件
+ */
+function checkJsFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const issues = [];
+  
+  // 检查ES6+特性使用
+  const es6Features = {
+    'const/let': /(const|let)\s+\w+\s*=/g,
+    'arrow functions': /=>/g,
+    'template literals': /`[^`]*\$\{[^}]*\}[^`]*`/g,
+    'destructuring': /{.*}=/g,
+    'spread operator': /\.\.\./g
+  };
+  
+  let es6Usage = 0;
+  for (const [feature, pattern] of Object.entries(es6Features)) {
+    const matches = content.match(pattern);
+    if (matches) {
+      es6Usage += matches.length;
+    }
+  }
+  
+  if (es6Usage === 0) {
+    issues.push('建议使用ES6+语法特性');
+  }
+  
+  // 检查代码长度
+  const lines = content.split('\n').length;
+  if (lines > 200) {
+    issues.push(`文件较大 (${lines}行)，建议拆分`);
+  }
+  
+  // 检查注释比例
+  const commentLines = (content.match(/\/\/.*|\/\*[\s\S]*?\*\//g) || []).length;
+  const commentRatio = commentLines / lines;
+  
+  if (commentRatio < 0.1 && lines > 50) {
+    issues.push('代码注释较少，建议添加更多注释');
+  }
+  
+  return issues;
+}
+
+/**
+ * 优化HTML文件
+ */
+function optimizeHtmlFile(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  let modified = false;
+  
+  // 添加DOCTYPE如果缺失
+  if (!content.includes('<!DOCTYPE html>')) {
+    content = '<!DOCTYPE html>\n' + content;
+    modified = true;
+  }
+  
+  // 添加meta charset如果缺失
+  if (!content.includes('charset="UTF-8"') && !content.includes('charset=utf-8')) {
+    content = content.replace(
+      /<head>/i,
+      '<head>\n  <meta charset="UTF-8">'
+    );
+    modified = true;
+  }
+  
+  // 添加viewport如果缺失
+  if (!content.includes('viewport')) {
+    content = content.replace(
+      /<meta charset="[^"]+">/,
+      '$&\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    );
+    modified = true;
+  }
+  
+  if (modified) {
+    fs.writeFileSync(filePath, content);
+  }
+  
+  return modified;
+}
+
+/**
+ * 生成优化报告
+ */
+function generateOptimizationReport(results) {
+  console.log('\n📊 代码优化报告');
+  console.log('='.repeat(60));
+  
+  let totalFiles = 0;
+  let totalIssues = 0;
+  let totalOptimized = 0;
+  
+  for (const [fileType, fileResults] of Object.entries(results)) {
+    console.log(`\n${fileType.toUpperCase()} 文件:`);
+    console.log('-'.repeat(40));
+    
+    for (const result of fileResults) {
+      totalFiles++;
+      
+      if (result.issues.length > 0) {
+        console.log(`\n  ${path.relative(process.cwd(), result.file)}:`);
+        result.issues.forEach(issue => {
+          console.log(`    ⚠️  ${issue}`);
+          totalIssues++;
+        });
+      }
+      
+      if (result.optimized) {
+        totalOptimized++;
+        console.log(`  ✅ ${path.relative(process.cwd(), result.file)}: 已优化`);
+      }
+    }
+  }
+  
+  console.log('\n' + '='.repeat(60));
+  console.log(`📁 扫描文件: ${totalFiles}`);
+  console.log(`⚠️  发现问题: ${totalIssues}`);
+  console.log(`✨ 优化文件: ${totalOptimized}`);
+  console.log('='.repeat(60));
+  
+  return {
+    totalFiles,
+    totalIssues,
+    totalOptimized
+  };
+}
+
+/**
+ * 主函数
+ */
+async function main() {
+  console.log('🔧 开始代码优化检查\n');
+  
+  // 获取所有代码文件
+  console.log('1. 扫描代码文件...');
+  const files = getAllCodeFiles();
+  console.log(`   找到 ${files.length} 个代码文件\n`);
+  
+  // 按类型分类
+  const htmlFiles = files.filter(f => f.endsWith('.html') || f.endsWith('.htm'));
+  const cssFiles = files.filter(f => f.endsWith('.css'));
+  const jsFiles = files.filter(f => f.endsWith('.js'));
+  
+  console.log(`   HTML文件: ${htmlFiles.length}`);
+  console.log(`   CSS文件: ${cssFiles.length}`);
+  console.log(`   JavaScript文件: ${jsFiles.length}\n`);
+  
+  // 检查文件
+  console.log('2. 检查代码质量...\n');
+  
+  const results = {
+    html: [],
+    css: [],
+    js: []
+  };
+  
+  // 检查HTML文件
+  for (const file of htmlFiles) {
+    const issues = checkHtmlFile(file);
+    const optimized = optimizeHtmlFile(file);
+    
+    results.html.push({
+      file,
+      issues,
+      optimized
+    });
+  }
+  
+  // 检查CSS文件
+  for (const file of cssFiles) {
+    const issues = checkCssFile(file);
+    
+    results.css.push({
+      file,
+      issues,
+      optimized: false // CSS优化需要手动进行
+    });
+  }
+  
+  // 检查JavaScript文件
+  for (const file of jsFiles) {
+    const issues = checkJsFile(file);
+    
+    results.js.push({
+      file,
+      issues,
+      optimized: false // JS优化需要手动进行
+    });
+  }
+  
+  // 生成报告
+  const report = generateOptimizationReport(results);
+  
+  // 提供建议
+  console.log('\n💡 优化建议:');
+  console.log('-'.repeat(40));
+  
+  if (report.totalIssues > 0) {
+    console.log('1. 修复发现的问题');
+    console.log('2. 使用现代HTML5语义化标签');
+    console.log('3. 优化CSS选择器复杂度');
+    console.log('4. 使用ES6+ JavaScript语法');
+    console.log('5. 添加适当的代码注释');
+    console.log('\n🔧 可以运行以下命令:');
+    console.log('   npm run format:md    # 格式化文档');
+    console.log('   npm run optimize:all # 运行所有优化');
+  } else {
+    console.log('✅ 代码质量良好，无需优化');
+  }
+  
+  console.log('\n🎉 代码检查完成！');
 }
 
 // 执行主函数
 if (require.main === module) {
-  main().catch(console.error);
+  main().catch(error => {
+    console.error('❌ 代码优化脚本执行失败:', error);
+    process.exit(1);
+  });
 }
 
 module.exports = {
-  optimizeHtmlFile,
-  optimizeJsFile,
-  optimizeCssFile,
-  findCodeFiles,
-  generateCodeIndex
+  getAllCodeFiles,
+  checkHtmlFile,
+  checkCssFile,
+  checkJsFile,
+  optimizeHtmlFile
 };
